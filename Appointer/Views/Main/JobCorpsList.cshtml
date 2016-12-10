@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Appointer.Models.JobCorp>
+
+@{
+    ViewBag.Title = " لیست کارکنان";//model.Job.Title
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr />
+<br />
+<h3>لیست کارکنان</h3>
+<br />
+       <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RoleTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Job.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Email)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            @foreach (Appointer.Models.JobCorp jc in ViewBag.JobCorps)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => jc.User.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => jc.RoleTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => jc.Job.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => jc.User.Email)
+                    </td>
+                    <td>
+                        @Html.ActionLink("رزرو وقت", "Reserve", new { id = jc.Id })
+                    </td>
+                    <td>
+                        @Html.ActionLink("رزرو انتخابی", "ChooseReserve", new { id = jc.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+
+@foreach (Appointer.Models.JobCorp jc in ViewBag.JobCorps)
+{
+<hr />
+<h4>@Html.ActionLink("مشخصات شغل", "JobDetails", new { id = jc.JobId })</h4>
+    break;
+}

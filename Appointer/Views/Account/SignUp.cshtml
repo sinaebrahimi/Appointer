@@ -1,0 +1,93 @@
+﻿
+@model Appointer.Models.User
+
+@{
+    ViewBag.Title = "ثبت نام";
+    Layout = "~/Views/shared/_layout.cshtml";
+}
+
+
+<div class="fullpage-form">
+    <div class="info">
+        <div class="info-title"><strong>ثبت نام</strong></div>
+        <hr>
+    </div>
+
+    @ViewBag.Error
+    @ViewBag.Message
+    @using (Html.BeginForm("SignUp", "Account", FormMethod.Post))
+    {
+
+
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="col-xs-12">
+
+                @Html.LabelFor(model => model.Email)
+                <br />
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+                <br />
+
+                @Html.LabelFor(model => model.FullName)
+                <br />
+                @Html.TextBoxFor(m => m.FullName)
+                @Html.ValidationMessageFor(m => m.FullName)
+                <br />
+
+                @Html.LabelFor(model => model.Password)
+                <br />
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+                <br />
+
+                @Html.LabelFor(model => model.Phone)
+                <br />
+                @Html.TextBoxFor(m => m.Phone, new { maxlength = "11", onkeyup = "this.value = this.value.replace(/[^0-9]/, '')" })
+                @Html.ValidationMessageFor(m => m.Phone)
+                <br />
+
+                @Html.LabelFor(model => model.CityId)
+                <br />
+                <select name="CityId" id="CityId">
+                    @foreach (Appointer.Models.City cities in ViewBag.cities)
+                    {
+                        <option value="@cities.Id">@cities.Name</option>
+                    }
+                </select><br />
+                <br />
+
+
+
+                @Html.LabelFor(model => model.UserRoleId)
+                <br />
+
+
+                @Html.DropDownListFor(model => model.UserRoleId, Enum.GetNames(typeof(Appointer.Models.UserRole_Persian)).Where(p => p != "مدیر").Select(e => new SelectListItem { Text = e, Value = (int)Enum.Parse(typeof(Appointer.Models.UserRole_Persian), e) + "" }))
+                <br />
+
+                <br />
+
+                @Html.LabelFor(model => model.About)
+                <br />
+                @Html.TextAreaFor(m => m.About)
+                <br />
+                <br />
+            </div>
+
+            <div class="col-xs-8 col-xs-offset-2">
+                <button class="btn btn-sm btn-primary btn-block" type="submit" value="Sign Up">ثبت نام</button>
+            </div>
+
+        </div>
+    }
+
+</div>
+
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+
+

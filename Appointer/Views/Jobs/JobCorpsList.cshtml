@@ -1,0 +1,65 @@
+﻿@*@model Appointer.Models.Job*@
+@model IEnumerable<Appointer.Models.JobCorp>
+
+
+@{
+    ViewBag.Title = "لیست همکاران";
+
+    Layout = "~/Views/shared/_layout.cshtml";
+}
+
+
+
+<div class="info">
+    <div class="info-title"><strong>لیست همکاران</strong></div>
+    <hr>
+</div>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <table class="table form-control">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RoleTitle)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (Appointer.Models.JobCorp jc in ViewBag.JobCorps)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => jc.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => jc.User.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => jc.User.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => jc.RoleTitle)
+                    </td>
+                    <td>
+                        @Html.ActionLink("حذف همکار", "DeleteJobCorp", new { id = jc.Id })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+
+
+

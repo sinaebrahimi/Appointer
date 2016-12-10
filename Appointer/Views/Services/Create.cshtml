@@ -1,0 +1,59 @@
+﻿@model Appointer.Models.Service
+
+@{
+    ViewBag.Title = "افزودن سرویس";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr />
+@*<br />
+    <h3>افزودن سرویس</h3>*@
+<br />
+<div class="fullpage-form">
+    <div class="info">
+        <div class="info-title"><strong>افزودن سرویس</strong></div>
+        <hr>
+    </div>
+    @ViewBag.Error
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary()
+
+
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="col-xs-12">
+                @Html.LabelFor(model => model.Duration)
+                <br />
+                @Html.EditorFor(model => model.Duration)
+                @Html.ValidationMessageFor(model => model.Duration)
+                <br />
+
+                @Html.LabelFor(model => model.Title)
+                <br />
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)
+
+                <br />
+                @Html.LabelFor(model => model.Description)
+                <br />
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+                <br /><br />
+            </div>
+
+            <div class="col-xs-8 col-xs-offset-2">
+                <button class="btn btn-sm btn-primary btn-block" type="submit" value="Create">افزودن سرویس</button>
+            </div>
+
+        </div>
+
+    }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

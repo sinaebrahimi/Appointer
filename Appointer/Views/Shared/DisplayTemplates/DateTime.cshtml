@@ -1,0 +1,9 @@
+﻿
+@model DateTime?
+
+@{
+    var persianDate = Model.HasValue && Model.Value != DateTime.MinValue ? Model.Value.ToPersianDateTime().ToString("yyyy/MM/dd") : "";
+}
+
+
+@persianDate

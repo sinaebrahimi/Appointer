@@ -1,0 +1,91 @@
+﻿@model Appointer.Models.Appointment
+
+
+@{
+    ViewBag.Title = "لغو قرار";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>لغو قرار</h2>
+
+
+<h3>آیا از کنسل کردن قرار خود اطمینان دارید؟</h3>
+<div>
+    <h4>قرار</h4>
+    <hr />
+    <dl class="main-container">
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BookDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("ساعت")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime.TimeOfDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Service.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Service.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Service.Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Service.Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Service.JobCorp.Job.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Service.JobCorp.Job.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Service.JobCorp.User.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Service.JobCorp.User.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="ReserveCancellation" class="btn btn-sm btn-primary btn-block" /> |
+            @Html.ActionLink("لیست قرارها", "Reservations")
+        </div>
+    }
+</div>

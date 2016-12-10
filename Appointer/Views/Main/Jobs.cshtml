@@ -1,0 +1,134 @@
+﻿@*@model Appointer.Models.Job*@
+@model IEnumerable<Appointer.Models.Job>
+@{
+    ViewBag.Title = "جستجوی مشاغل";
+
+    Layout = "~/Views/shared/_layout.cshtml";
+}
+<hr />
+<br />
+<h2>جستجوی مشاغل</h2>
+<hr />
+<div class="form">
+    @using (Html.BeginForm("Index", "Main", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+
+            <div class="col-lg-3">
+                <div class="col-lg-10">
+                    <button class="btn-success btn btn-hover" name="submit" type="submit">جستجو</button>
+                </div>
+
+            </div>
+            <div class="col-lg-3">
+
+                <div class="col-lg-10">
+
+                    <select name="jobtype" id="jobtype">
+                        <option style="color:red" value="">نوع شغل</option>
+                        @foreach (Appointer.Models.JobType jt in ViewBag.jt)
+                {
+                            <option value="@jt.Title">@jt.Title</option>
+                        }
+                    </select>
+
+                </div>
+                @*<label class="col-md-2">نوع‌شغل</label>*@
+            </div>
+
+
+
+            <div class="col-lg-3">
+                <div class="col-lg-10">
+                    <select name="city" id="city">
+                        <option class="text-success" value="">شهر</option>
+                        @foreach (Appointer.Models.City cities in ViewBag.cities)
+                        {
+                            <option value="@cities.Name" class="text-info">@cities.Name</option>
+                        }
+                    </select>
+
+                </div>
+
+                @*<label class="col-md-2">شهر</label>*@
+            </div>
+
+            <div class="col-lg-3">
+                <div class="col-lg-10">
+                    <input type="text" name="title" id="title" placeholder="نام شغل" />
+                </div>
+
+                @*<label class="col-md-2">نام‌شغل</label>*@
+            </div>
+
+
+
+
+        </div>
+
+
+    }
+</div>
+<hr />
+<br />
+
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.User.FullName)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.JobPhone)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.City.Name)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.JobType.Title)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Title, "JobCorpsList", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobType.Title)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>
+@section Styles
+      {
+    <style>
+        h2 {
+            color: orange;
+        }
+    </style>
+
+
+}

@@ -1,0 +1,30 @@
+﻿@*<div class="navbar">*@
+
+<div class="collapse navbar-collapse">
+    <nav class="navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar-header pull-right">
+            <a class="navbar-brand" href="~/Home/Index"><strong>منشی دیجیتال</strong></a>
+        </div>
+        <ul class="nav navbar-nav">
+
+
+            @*<li class="text-center">خوش آمدید، <a href="~/Account/Edit"><b>@Session["fullName"]</b></a>!</li>*@
+            @if (Session["fullName"] != null)
+            {
+
+                <li><a href="~/Account/SignOut"><span class="fa fa-sign-out" aria-hidden="true">&nbsp;</span>خروج</a></li>
+                @*<li><a href="~/Account/Edit?Id=@Session["userId"]"><span class="fa fa-user" aria-hidden="true">&nbsp;</span>@Session["fullName"]</a></li>*@
+                <li><a href="~/Account/Edit"><span class="fa fa-user" aria-hidden="true">&nbsp;</span>@Session["fullName"]</a></li>
+
+                @*<li><span class="fa fa-user" aria-hidden="true">&nbsp;</span>@Html.ActionLink(@Session["fullName"].ToString(), "Edit", "Account", new { Id = Session["userId"].ToString() }, null)</li>*@
+
+            }
+            else
+            {
+
+                <li><a href="~/Account/SignUp"><span class="fa fa-user-plus" aria-hidden="true">&nbsp;</span>ثبت نام</a></li>
+                <li><a href="~/Account/SignIn"><span class="fa fa-sign-in" aria-hidden="true">&nbsp;</span>ورود</a></li>
+            }
+        </ul>
+    </nav>
+</div>

@@ -1,0 +1,115 @@
+﻿@model Appointer.Models.Appointment
+
+
+@{
+    ViewBag.Title = "لغو قرار";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>لغو ملاقات</h2>
+
+
+<h3>آیا از کنسل کردن قرار خود اطمینان دارید؟</h3>
+<div>
+    <hr />
+    <dl class="main-container">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("ساعت شروع")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime.TimeOfDay)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayName("ساعت پایان")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime.TimeOfDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Service.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Service.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Service.Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Service.Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Phone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.City.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.City.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        
+            <input type="submit" value="AppointmentCancellation" class="btn btn-sm btn-primary btn-block" />
+        
+    }
+
+</div>

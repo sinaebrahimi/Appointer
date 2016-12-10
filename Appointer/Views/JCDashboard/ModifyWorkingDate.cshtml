@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Appointer.Models.WorkingTime>
+
+@{
+    ViewBag.Title = "تغییر روزهای کاری";
+    Layout = "~/Views/shared/_layout.cshtml";
+}
+
+<div class="info">
+    <div class="info-title"><strong>تغییر روزهای کاری</strong></div>
+</div>
+
+<hr />
+@ViewBag.Info
+<div class="input-form">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayName("تاریخ")
+                        </th>
+                        <th>
+                            @Html.DisplayName(" روز")
+                        </th>
+                        <th>
+                            @Html.DisplayName(" شروع")
+                        </th>
+                        <th>
+                            @Html.DisplayName(" پایان")
+                        </th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartTime.DayOfWeek)
+                        </td>
+
+                        @{string StartHHmm = item.StartTime.ToString("HH:mm");  }
+
+                        <td>
+                            @Html.DisplayFor(modelItem => StartHHmm)
+                        </td>
+
+                        @{string EndHHmm = item.EndTime.ToString("HH:mm");  }
+                        <td>
+                            @Html.DisplayFor(modelItem => EndHHmm)
+                        </td>
+
+                        @using (@Html.BeginForm("ModifyWorkingDate", "JCDashboard", FormMethod.Post))
+                        {
+
+
+                            <td>
+
+                                <input type="hidden" name="wtid" id="wtid" value="@item.Id" />
+                                <div class="form-group">
+                                    <div class="col-sm-8">
+                                        <input type="submit" class="btn btn-danger" value="حذف زمان کاری" />
+                                    </div>
+                                </div>
+                            </td>
+                        }
+
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

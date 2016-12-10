@@ -1,0 +1,35 @@
+﻿@model Appointer.Models.User
+
+@{
+    ViewBag.Title = "ورود";
+}
+
+<div class="fullpage-form">
+    <div class="info">
+        <div class="info-title"><strong>ورود به سامانه</strong></div>
+        <hr>
+    </div>
+    @ViewBag.Error
+    @ViewBag.Message
+    @using (Html.BeginForm("SignIn", "Account", FormMethod.Post))
+    {
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="col-xs-12">
+                <label for="Email">نام یا ایمیل: </label><br />
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+
+
+                <br />
+
+                <label for="Password"> رمز عبور: </label><br />
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <br />
+            <div class="col-xs-8 col-xs-offset-2">
+                <button class="btn btn-sm btn-primary btn-block" type="submit" value="Log in">ورود</button>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,99 @@
+﻿@model Appointer.Models.Job
+
+@{
+    ViewBag.Title = "مشخصات شغل";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+
+
+    <dl class="main-container">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        
+        <hr />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobPhone)
+        </dd>
+        
+        <hr />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        
+        <hr />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.About)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.About)
+        </dd>
+        
+        <hr />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City.Name)
+        </dd>
+        
+        <hr />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        
+        <hr />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobType.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobType.Title)
+        </dd>
+
+        <hr />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+
+
+    </dl>
+    </div>
+<p>
+    @Html.ActionLink("بازگشت به لیست شغل ها", "JobsList")  |
+    @Html.ActionLink("لیست کارکنان", "JobCorpsList", new { id = Model.Id })
+</p>
+

@@ -1,0 +1,153 @@
+﻿@font-face {
+    font-family: 'IRANSans';
+    src: url('../../fonts/IRANSans.eot'); /* IE9 Compat Modes */
+    src: url('../../fonts/IRANSans.woff') format('woff'); /* Pretty Modern Browsers */
+    src: url('../../fonts/IRANSans.woff2') format('woff2'); /* Super Modern Browsers */
+    src: url('../../fonts/IRANSans.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+html,
+body,h1,h2,h3,h4 {
+    font-family: 'IRANSans', Tahoma, sans-serif !important;
+    font-size: 15px;
+}
+
+ul {
+	/*list-style: none;
+	text-decoration: none;*/
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul#menu li {
+    display:inline;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+/*
+.nav > li > a {
+    padding: 12px 12px;
+}*/
+
+.dropdown-menu {
+    font-size: 13px;
+}
+
+.dropdown-menu .fa {
+    font-size: 15px;
+}
+
+.navbar-inverse {
+    vertical-align: middle;
+    height: 50px;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    padding: 15px 15px;
+}
+
+.sidebar-menu {
+    position: fixed;
+    height: 100%;
+    width: 175px;
+    top: 50px;
+    line-height: 25px;
+    background-color: #ecf0f1;
+}
+
+.sidebar-menu li{
+	padding:5px 20px;
+	border: red;
+}
+
+.sidebar-menu li:hover{
+	background: #18BC9C;
+	color: white;
+}
+
+.sidebar-menu li:hover a{
+	color: white;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0px;
+}
+.sidebar-menu > li > a {
+  padding: 10px 10px 10px 10px;
+  display: block;
+  text-align: center;
+}
+
+.main-container {
+    width: 75%;
+    left: 5%;
+}
+
+.footer-bottom {
+    font-size: small;
+    text-align: justify;
+    overflow: hidden;
+    background-color: #18BC9C;
+    position: fixed;
+    right: 175px;
+    left: 0;
+    bottom: 0;
+    height: 20px;
+}
+
+.fa {
+    font-size: 25px;
+}
+
+.plus {
+    text-align: center;
+}
+
+.plus .fa {
+    font-size: 33px;
+}
+
+.nav .fa {
+    font-size: 20px;
+}
+
+.info-title {
+    font-size: 20px;
+    text-align: center;
+}
+
+.fullpage-form {
+    margin-left: 20%;
+    text-align: center;
+}
+
+.fullpage-form input{
+    width:100%;
+    margin-bottom: 20px;
+}
+
+.fullpage-form select{
+    width:75%;
+    margin-bottom: 20px;
+}
+
+.input-form {
+    padding: 15px 10px 15px 10px;
+    text-align: center;
+}
+
+.input-form input {
+    width:100%;
+    margin-bottom: 20px;
+}
+
+.input-form select{
+    width:75%;
+    margin-bottom: 20px;
+}

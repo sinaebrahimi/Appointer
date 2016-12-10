@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Appointer.Models.Appointment>
+
+@{
+    ViewBag.Title = "لیست قرارهای کاربر";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<hr />
+<br />
+<h3>لیست قرارهای امروز و فردا</h3>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayName("شروع")
+        </th>
+        <th>
+            @Html.DisplayName("پایان")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Service.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Service.Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Service.JobCorp.Job.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Service.JobCorp.User.FullName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        @{string StartHHmm = item.StartTime.ToString("HH:mm");  }
+        
+        <td>
+            @Html.DisplayFor(modelItem => StartHHmm)
+        </td>
+
+        @{string EndHHmm = item.EndTime.ToString("HH:mm");  }
+        <td>
+            @Html.DisplayFor(modelItem => EndHHmm)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.isReserved)
+            if isReserved ==0  then color that record red
+        </td>*@
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Service.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Service.Duration)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Service.JobCorp.Job.Title)
+        </td>*@
+        <td>
+            @Html.ActionLink(item.Service.JobCorp.Job.Title , "JobCorpsList", new { id = item.Service.JobCorp.JobId })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Service.JobCorp.User.FullName)
+        </td>
+        <td>
+            @Html.ActionLink("ویرایش", "ReserveEdit", new { id=item.Id }) |
+            @Html.ActionLink("جزئیات", "ReserveDetails", new { id=item.Id }) |
+            @Html.ActionLink("کنسل", "ReserveCancellation", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+
+<hr />
+<h4>@Html.ActionLink("قرارهای آتی", "FutureReservations")</h4>
+<br />
+<h4>@Html.ActionLink("قرارهای قدیمی", "ExpiredReservations")</h4>
+

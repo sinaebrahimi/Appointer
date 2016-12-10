@@ -1,0 +1,65 @@
+﻿
+@model IEnumerable<Appointer.Models.Service>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<hr />
+<br/>
+<h3>سرویس ها</h3>
+<br />
+
+<div class="row">
+    <div class="plus">
+        <a href="~/Services/Create">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i><br />
+            سرویس جدید
+        </a>
+    </div>
+
+</div>
+
+<hr />
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                    @Html.ActionLink("ویرایش", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("حذف", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

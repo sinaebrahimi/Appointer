@@ -1,0 +1,63 @@
+﻿@model Appointer.Models.Job
+
+
+@{
+    ViewBag.Title = "ثبت نام همکاران برای کار";
+    Layout = "~/Views/shared/_layout.cshtml";
+}
+
+<div class="fullpage-form">
+    <div class="info">
+        <div class="info-title"><strong>ثبت نام در کار</strong></div>
+        <hr>
+    </div>
+    @ViewBag.Error
+    @ViewBag.Message
+    @using (Html.BeginForm("EnrollJob", "JCDashboard", FormMethod.Post))
+    {
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="col-xs-12">
+                <label for="EnrollmentKey">کد: </label><br />
+                @*@Html.TextBoxFor(m => m.EnrollmentKey)
+                @Html.ValidationMessageFor(m => m.EnrollmentKey)*@
+
+                <input type="text" id="EnrollmentKeyValue" name="EnrollmentKeyValue" value="" />
+                <input type="button" id="checkoutJob" class="btn-warning" value="بررسی" />
+                <div class="ajaxRes"></div>
+
+                <br />
+
+
+            </div>
+            <br />
+            <div class="col-xs-8 col-xs-offset-2">
+                <button class="btn btn-sm btn-primary btn-block" type="submit" value="Enroll Job">ثبت نام</button>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+<script type="text/javascript">
+$(document).ready(function () {
+  var url = '@Url.Action("JsonCheck")'; // add controller name is necessary
+    $('#checkoutJob').click(function () {
+        $.getJSON(url, { ekey: $('#EnrollmentKeyValue').val() }, function (response) {
+        //alert(response);
+        if (response == false) {
+
+            $(".ajaxRes").html("<span style='color: red;'>شغلی با کد ارسالی شما یافت نشد</span>");
+            
+        }
+        else
+        {
+            $(".ajaxRes").html(response.Title + "<hr><span style='color: blue;'>صاحب کار:</span><br/>" + response.JobOwner + "<hr><span style='color: blue;'>شماره تماس:</span><br/>" + response.JobPhone + "<hr><span style='color: blue;'>آدرس:</span><br/>" + response.City+"<br/>"+response.Address);
+
+
+        }
+    });
+  });
+});
+
+</script>
+}
