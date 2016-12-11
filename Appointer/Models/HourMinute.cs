@@ -7,6 +7,6 @@ namespace Appointer.Models
 {
     public class HourMinute
     {
-        public TimeSpan hm { set; get; }
+        public TimeSpan hm {set; get;}
     }
 }

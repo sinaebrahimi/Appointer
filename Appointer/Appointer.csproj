@@ -251,6 +251,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Files\business.png" />
     <Content Include="Files\doctor.png" />
+    <Content Include="Files\index.jpg" />
+    <Content Include="Files\logo.png" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
