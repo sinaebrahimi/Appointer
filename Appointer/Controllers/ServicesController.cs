@@ -18,7 +18,7 @@ namespace Appointer.Controllers
         // GET: Services
         public ActionResult Index()
         {
-            if (Session["userRole"].ToString() == "JobCorp" || Session["userRole"].ToString() == "JobOwner")
+            if (SessionPersister.UserRole.ToString() == "JobCorp" || SessionPersister.UserRole.ToString() == "JobOwner")
             {
 
 

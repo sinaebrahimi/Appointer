@@ -211,7 +211,6 @@
     <Compile Include="Models\JobCorp.cs">
       <DependentUpon>Appointer.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\JobModel.cs" />
     <Compile Include="Models\JobType.cs">
       <DependentUpon>Appointer.tt</DependentUpon>
     </Compile>

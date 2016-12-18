@@ -26,15 +26,15 @@ namespace Appointer.Controllers
         {
             if (Session["userRole"] != null)
             {
-                if (Session["userRole"].ToString() == "Admin")
+                if (SessionPersister.UserRole.ToString() == "Admin")
                 {
                     return View(db.Users.ToList());
                 }
-                else if (Session["userRole"].ToString() == "User")
+                else if (SessionPersister.UserRole.ToString() == "User")
                 {
-                    return RedirectToAction("Index", "Main");
+                    return RedirectToAction("Jobs", "Main");
                 }
-                else if (Session["userRole"].ToString() == "JobCorp" || Session["userRole"].ToString() == "JobOwner")
+                else if (SessionPersister.UserRole.ToString() == "JobCorp" || SessionPersister.UserRole.ToString() == "JobOwner")
                 {
 
                     return RedirectToAction("Index", "JCDashboard");
@@ -43,7 +43,7 @@ namespace Appointer.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Main");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             
@@ -96,7 +96,7 @@ namespace Appointer.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Main");
+                return RedirectToAction("Jobs", "Main");
             }
         }
 
@@ -111,12 +111,12 @@ namespace Appointer.Controllers
             else
             {
 
-                if (Session["userRole"].ToString() == "Admin")
+                if (SessionPersister.UserRole.ToString() == "Admin")
                 {
 
                     return RedirectToAction("Index", "Admin");
                 }
-                else if (Session["userRole"].ToString() == "JobCorp" || Session["userRole"].ToString() == "JobOwner")
+                else if (SessionPersister.UserRole.ToString() == "JobCorp" || SessionPersister.UserRole.ToString() == "JobOwner")
                 {
 
                     DateTime dt = DateTime.Now.AddDays(2);
@@ -159,7 +159,7 @@ namespace Appointer.Controllers
                         }
                         return RedirectToAction("FutureReservations", "Main");
                     }
-                    return RedirectToAction("Index", "Main");
+                    return RedirectToAction("Jobs", "Main");
                 }
 
             }
@@ -185,12 +185,12 @@ namespace Appointer.Controllers
             SessionPersister.UserRole = user.UserRole.Name;
 
 
-            if (Session["userRole"].ToString() == "Admin")
+            if (SessionPersister.UserRole.ToString() == "Admin")
             {
 
                 return RedirectToAction("Index", "Admin");
             }
-            else if (Session["userRole"].ToString() == "JobCorp" || Session["userRole"].ToString() == "JobOwner")
+            else if (SessionPersister.UserRole.ToString() == "JobCorp" || SessionPersister.UserRole.ToString()  == "JobOwner")
             {
                 DateTime dt = DateTime.Now.AddDays(2);
 
@@ -232,7 +232,7 @@ namespace Appointer.Controllers
                     }
                     return RedirectToAction("FutureReservations", "Main");
                 }
-                return RedirectToAction("Index", "Main");
+                return RedirectToAction("Jobs", "Main");
             }
 
 
@@ -307,7 +307,7 @@ namespace Appointer.Controllers
                     {
                         return RedirectToAction("Reservations", "Main");
                     }
-                    return RedirectToAction("Index", "Main");
+                    return RedirectToAction("Jobs", "Main");
                 }
             }
             else if (SessionPersister.UserRole.ToString() == "JobOwner")
@@ -331,7 +331,7 @@ namespace Appointer.Controllers
                     {
                         return RedirectToAction("Reservations", "Main");
                     }
-                    return RedirectToAction("Index", "Main");
+                    return RedirectToAction("Jobs", "Main");
                 }
                 else//JobOwner
                 {
@@ -395,7 +395,7 @@ namespace Appointer.Controllers
                     {
                         return RedirectToAction("Reservations", "Main");
                     }
-                    return RedirectToAction("Index", "Main");
+                    return RedirectToAction("Jobs", "Main");
                 }
                 else//JobOwner
                 {
@@ -421,7 +421,7 @@ namespace Appointer.Controllers
             }
 
             
-            return RedirectToAction("Index", "Main");
+            return RedirectToAction("Jobs", "Main");
         }
 
         //[HttpGet]

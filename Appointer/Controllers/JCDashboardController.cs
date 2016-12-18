@@ -18,7 +18,7 @@ namespace Appointer.Controllers
 
         private AppointerEntities db = new AppointerEntities();
 
-        private JobModel jm = new JobModel();
+        //private JobModel jm = new JobModel();
         // GET: JCDashboard
         public ActionResult Index()
         {
@@ -38,7 +38,7 @@ namespace Appointer.Controllers
 
                     return RedirectToAction("SignIn", "Account");
                 }
-                return RedirectToAction("Index", "Main");
+                return RedirectToAction("Jobs", "Main");
             }
 
             //return View();
@@ -75,17 +75,17 @@ namespace Appointer.Controllers
         public ActionResult EnrollJob()
         {
 
-            if (Session["userRole"].ToString() == "Admin")
+            if (SessionPersister.UserRole.ToString() == "Admin")
             {
 
                 return RedirectToAction("Index", "Admin");
             }
-            else if (Session["userRole"].ToString() == "JobOwner")
+            else if (SessionPersister.UserRole.ToString() == "JobOwner")
             {
 
                 return RedirectToAction("Index", "JCDashboard");
             }
-            else if (Session["userRole"].ToString() == "JobCorp")
+            else if (SessionPersister.UserRole.ToString() == "JobCorp")
             {
 
                 return View();
@@ -136,13 +136,13 @@ namespace Appointer.Controllers
         public ActionResult AddWorkingDate()
         {
 
-            if (Session["userRole"].ToString() == "Admin")
+            if (SessionPersister.UserRole.ToString() == "Admin")
             {
 
                 return RedirectToAction("Index", "Admin");
             }
 
-            else if (Session["userRole"].ToString() == "JobCorp" || Session["userRole"].ToString() == "JobOwner")
+            else if (SessionPersister.UserRole.ToString() == "JobCorp" || SessionPersister.UserRole.ToString() == "JobOwner")
             {
 
                 JobCorp jc = new JobCorp();
@@ -156,7 +156,7 @@ namespace Appointer.Controllers
             else
             {
 
-                return RedirectToAction("Index", "Main");
+                return RedirectToAction("Jobs", "Main");
             }
 
         }
@@ -227,13 +227,13 @@ namespace Appointer.Controllers
         public ActionResult AddWorkingTime()
         {
 
-            if (Session["userRole"].ToString() == "Admin")
+            if (SessionPersister.UserRole.ToString() == "Admin")
             {
 
                 return RedirectToAction("Index", "Admin");
             }
 
-            else if (Session["userRole"].ToString() == "JobCorp" || Session["userRole"].ToString() == "JobOwner")
+            else if (SessionPersister.UserRole.ToString() == "JobCorp" || SessionPersister.UserRole.ToString() == "JobOwner")
             {
 
                 JobCorp jc = new JobCorp();
@@ -306,7 +306,7 @@ namespace Appointer.Controllers
                                 {
                                     JobCorpId = jc.Id,
                                     StartTime = t.Date + stimelist[j].hm,
-                                    EndTime = t.Date + etimelist[j].hm,
+                                    EndTime = t.Date + etimelist[j].hm
                                 });
 
                             }
@@ -342,7 +342,11 @@ namespace Appointer.Controllers
                     {
                         continue;
                     }
-                    for(int j=0; j<wd.Range.Count; j++)
+                    if ((i == 0) && (ts >= DateTime.Now.TimeOfDay))
+                    {
+                        continue;
+                    }
+                    for (int j=0; j<wd.Range.Count; j++)
                     {
 
                         stimelist.Add(new HourMinute
@@ -413,7 +417,7 @@ namespace Appointer.Controllers
 
                     return RedirectToAction("SignIn", "Account");
                 }
-                return RedirectToAction("Index", "Main");
+                return RedirectToAction("Jobs", "Main");
             }
 
         }
@@ -434,7 +438,7 @@ namespace Appointer.Controllers
 
                     return RedirectToAction("SignIn", "Account");
                 }
-                return RedirectToAction("Index", "Main");
+                return RedirectToAction("Jobs", "Main");
             }
 
         }
@@ -455,7 +459,7 @@ namespace Appointer.Controllers
 
                     return RedirectToAction("SignIn", "Account");
                 }
-                return RedirectToAction("Index", "Main");
+                return RedirectToAction("Jobs", "Main");
             }
 
         }
@@ -511,9 +515,9 @@ namespace Appointer.Controllers
 
         public ActionResult ModifyWorkingDate()
         {
-            if (Session["userRole"].ToString() == "User" || Session["userRole"].ToString() == "Admin")
+            if (SessionPersister.UserRole.ToString() == "User" || SessionPersister.UserRole.ToString() == "Admin")
             {
-                return RedirectToAction("Index", "Main");
+                return RedirectToAction("Jobs", "Main");
             }
 
             User user = db.Users.Find(SessionPersister.UserId);

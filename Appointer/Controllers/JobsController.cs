@@ -17,7 +17,7 @@ namespace Appointer.Controllers
     {
         private AppointerEntities db = new AppointerEntities();
 
-        private JobModel jm = new JobModel();
+       // private JobModel jm = new JobModel();
 
         // GET: Jobs
         public ActionResult Index()
@@ -51,11 +51,11 @@ namespace Appointer.Controllers
             {
                 return RedirectToAction("SignIn", "Account");
             }
-            if (Session["userRole"].ToString() == "User")
+            if (SessionPersister.UserRole.ToString() == "User")
             {
                 return RedirectToAction("Index", "Home");
             }
-            if (Session["userRole"].ToString() == "JobCorp")
+            if (SessionPersister.UserRole.ToString() == "JobCorp")
             {
                 return RedirectToAction("EnrollJob", "JCDashboard");
             }
@@ -79,16 +79,16 @@ namespace Appointer.Controllers
             {
                 return RedirectToAction("SignIn", "Account");
             }
-            else if(Session["userRole"].ToString() == "User")
+            else if(SessionPersister.UserRole.ToString() == "User")
             {
                 return RedirectToAction("Index", "Home");
             }
-            else if (Session["userRole"].ToString() == "JobCorp")
+            else if (SessionPersister.UserRole.ToString() == "JobCorp")
             {
                 return RedirectToAction("EnrollJob", "JCDashboard");
             }
 
-            job.JobOwnerId = Int32.Parse(Session["userId"].ToString());
+            job.JobOwnerId = Int32.Parse(SessionPersister.UserId.ToString());
             job.EnrollmentKey = null;
 
             
@@ -116,25 +116,28 @@ namespace Appointer.Controllers
         {
 
 
-            if (Session["userRole"].ToString() == "User")
+            if (SessionPersister.UserRole.ToString() == "User")
             {
 
                 return RedirectToAction("Index", "Home");
             }
-            else if (Session["userRole"].ToString() == "Admin")
+            else if (SessionPersister.UserRole.ToString() == "Admin")
             {
 
                 return RedirectToAction("Index", "Admin");
             }
-            else if (Session["userRole"].ToString() == "JobCorp")
+            else if (SessionPersister.UserRole.ToString() == "JobCorp")
             {
                 return RedirectToAction("Index", "JCDashboard");
             }
 
             else
             {
-                Job job = jm.findByUserId(Int32.Parse(Session["userId"].ToString()));
-                
+                int uid = Int32.Parse(SessionPersister.UserId.ToString());
+                Job job = db.Jobs.FirstOrDefault(acc => acc.JobOwnerId == uid);
+               // Job job = jm.findByUserId(Int32.Parse(Session["userId"].ToString()));
+
+                //return db.Jobs.Where(acc => acc.JobOwnerId.Equals(id)).FirstOrDefault();
                 if (job == null)
                 {
                     ViewBag.Error = "job Not Found";
@@ -154,7 +157,7 @@ namespace Appointer.Controllers
         public ActionResult Edit(Job job)
         {
             
-            job.JobOwnerId = Int32.Parse(Session["userId"].ToString());
+            job.JobOwnerId = Int32.Parse(SessionPersister.UserId.ToString());
             //job.EnrollmentKey = null;
             bool EnrollKeyExists = db.Jobs.Any(o => o.EnrollmentKey.Equals(job.EnrollmentKey));
             
@@ -193,17 +196,17 @@ namespace Appointer.Controllers
         {
 
 
-            if (Session["userRole"].ToString() == "User")
+            if (SessionPersister.UserRole.ToString() == "User")
             {
 
                 return RedirectToAction("Index", "Home");
             }
-            else if (Session["userRole"].ToString() == "Admin")
+            else if (SessionPersister.UserRole.ToString() == "Admin")
             {
 
                 return RedirectToAction("Index", "Admin");
             }
-            else if (Session["userRole"].ToString() == "JobCorp")
+            else if (SessionPersister.UserRole.ToString() == "JobCorp")
             {
                 return RedirectToAction("Index", "JCDashboard");
             }
@@ -217,7 +220,9 @@ namespace Appointer.Controllers
 
                 //ViewBag.JobCorps = db.JobCorps.ToList();
 
-                Job job = jm.findByUserId(Int32.Parse(Session["userId"].ToString()));
+                int uid = Int32.Parse(SessionPersister.UserId.ToString());
+                Job job = db.Jobs.FirstOrDefault(acc => acc.JobOwnerId == uid);
+                //Job job = jm.findByUserId(Int32.Parse(Session["userId"].ToString()));
                 ViewBag.JobCorps = db.JobCorps.Where(model => model.JobId.Equals(job.Id)).ToList();
                 //var jobs = db.Jobs.Where(model => model.JobOwnerId.Equals(SessionPersister.UserId)).FirstOrDefault();
 

@@ -254,7 +254,7 @@ namespace Appointer.Controllers
                 }
                 db.Entry(ap).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Main");
+                return RedirectToAction("FutureReservations", "Main");
             }
 
 
@@ -291,10 +291,10 @@ namespace Appointer.Controllers
                 //db.Appointments.Remove(ap);
                 db.Entry(ap).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Main");
+                return RedirectToAction("Jobs", "Main");
             }
 
-            return RedirectToAction("Index", "Main");
+            return RedirectToAction("Jobs", "Main");
         }
 
 
