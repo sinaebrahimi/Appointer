@@ -57,165 +57,167 @@
 </head>
 <body>
     @Html.Partial("~/Views/shared/_Header.cshtml")
-    <div id="body">
-        @if (Session["userRole"] == null)
-        {
-            <div class="sidebar col-xs-2">
-                <ul class="nav nav-sidebar">
-                    <li>
-                        <a href="~/Home/Index">
-                            <span class="fa fa-home" aria-hidden="true"></span><br>خانه
-                        </a>
-                    </li>
+    <div class="container-fluid">
+        <div id="body" class="row">
+            @if (Session["userRole"] == null)
+            {
+                <div class="sidebar col-xs-2">
+                    <ul class="nav nav-sidebar">
+                        <li>
+                            <a href="~/Home/Index">
+                                <span class="fa fa-home" aria-hidden="true"></span><br>خانه
+                            </a>
+                        </li>
 
-                    <hr />
+                        <hr />
 
-                    <li>
-                        <a href="~/Main/Jobs">
-                            <span class="fa fa-map-marker" aria-hidden="true"></span><br>مشاغل
-                        </a>
-                    </li>
+                        <li>
+                            <a href="~/Main/Jobs">
+                                <span class="fa fa-map-marker" aria-hidden="true"></span><br>مشاغل
+                            </a>
+                        </li>
 
-                    <hr />
+                        <hr />
 
-                    <li>
-                        <a href="~/AboutUs.html">
-                            <span class="fa fa-info-circle" aria-hidden="true"></span><br>درباره ما
-                        </a>
-                    </li>
-                </ul>
+                        <li>
+                            <a href="~/AboutUs.html">
+                                <span class="fa fa-info-circle" aria-hidden="true"></span><br>درباره ما
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+            else if (Session["userRole"].ToString() == "JobCorp")
+            {
+                <div class="sidebar col-xs-2">
+                    <ul class="nav nav-sidebar">
+                        <li>
+                            <a href="~/JCDashboard/AddWorkingTime">
+                                <span class="fa fa-home" aria-hidden="true"></span><br>روزهای‌کاری هفتگی
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/JCDashboard/AppointmentList">
+                                <span class="fa fa-book" aria-hidden="true"></span><br>لیست رزروها
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/JCDashboard/AddWorkingDate">
+                                <span class="fa fa-book" aria-hidden="true"></span><br>افزودن روز کاری
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="~/Services/Index">
+                                <span class="fa fa-book" aria-hidden="true"></span><br>سرویس ها
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/Main/Jobs">
+                                <span class="fa fa-map-marker" aria-hidden="true"></span><br>شغل‌ها
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            }
+
+
+            else if (Session["userRole"].ToString() == "JobOwner")
+            {
+
+                <div class="sidebar col-xs-2">
+                    <ul class="nav nav-sidebar">
+                        <li>
+                            <a href="~/Jobs/Edit">
+                                <span class="fa fa-book" aria-hidden="true"></span><br>ویرایش شغل
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/Jobs/JobCorpsList">
+                                <span class="fa fa-book" aria-hidden="true"></span><br>لیست همکاران
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/JCDashboard/AddWorkingTime">
+                                <span class="fa fa-home" aria-hidden="true"></span><br>روزهای‌کاری هفتگی
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/JCDashboard/AppointmentList">
+                                <span class="fa fa-book" aria-hidden="true"></span><br>لیست رزروها
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/Services/Index">
+                                <span class="fa fa-book" aria-hidden="true"></span><br>سرویس ها
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/Main/Jobs">
+                                <span class="fa fa-map-marker" aria-hidden="true"></span><br>شغل‌ها
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+
+
+            else if (Session["userRole"].ToString() == "Admin")
+            {
+
+                <div class="sidebar col-xs-2">
+                    <ul class="nav nav-sidebar">
+                        <li>
+                            <a href="~/Admin/Index">
+                                <span class="fa fa-book" aria-hidden="true"></span><br>پنل ادمین
+                            </a>
+                        </li>
+                        <hr>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="sidebar col-xs-2">
+                    <ul class="nav nav-sidebar">
+                        <li>
+                            <a href="~/Home/Index">
+                                <span class="fa fa-home" aria-hidden="true"></span><br>خانه
+                            </a>
+                        </li>
+
+                        <hr>
+
+                        <li>
+                            <a href="~/Main/Jobs">
+                                <span class="fa fa-map-marker" aria-hidden="true"></span><br>مشاغل
+                            </a>
+                        </li>
+
+                        <hr>
+
+                        <li>
+                            <a href="~/Main/Reservations">
+                                <span class="fa fa-book" aria-hidden="true"></span><br>رزروهای آتی
+                            </a>
+                        </li>
+
+                        <hr />
+
+                        <li>
+                            <a href="~/AboutUs.html">
+                                <span class="fa fa-info-circle" aria-hidden="true"></span><br>درباره ما
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+
+            @RenderSection("featured", required: false)
+            <div class="col-sm-10 col-md-10 col-xs-10">
+                @RenderBody()
             </div>
-        }
-        else if (Session["userRole"].ToString() == "JobCorp")
-        {
-            <div class="sidebar col-xs-2">
-                <ul class="nav nav-sidebar">
-                    <li>
-                        <a href="~/JCDashboard/AddWorkingTime">
-                            <span class="fa fa-home" aria-hidden="true"></span><br>روزهای‌کاری هفتگی
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/JCDashboard/AppointmentList">
-                            <span class="fa fa-book" aria-hidden="true"></span><br>لیست رزروها
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/JCDashboard/AddWorkingDate">
-                            <span class="fa fa-book" aria-hidden="true"></span><br>افزودن روز کاری
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="~/Services/Index">
-                            <span class="fa fa-book" aria-hidden="true"></span><br>سرویس ها
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/Main/Jobs">
-                            <span class="fa fa-map-marker" aria-hidden="true"></span><br>شغل‌ها
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-        }
-
-
-        else if (Session["userRole"].ToString() == "JobOwner")
-        {
-
-            <div class="sidebar col-xs-2">
-                <ul class="nav nav-sidebar">
-                    <li>
-                        <a href="~/Jobs/Edit">
-                            <span class="fa fa-book" aria-hidden="true"></span><br>ویرایش شغل
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/Jobs/JobCorpsList">
-                            <span class="fa fa-book" aria-hidden="true"></span><br>لیست همکاران
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/JCDashboard/AddWorkingTime">
-                            <span class="fa fa-home" aria-hidden="true"></span><br>روزهای‌کاری هفتگی
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/JCDashboard/AppointmentList">
-                            <span class="fa fa-book" aria-hidden="true"></span><br>لیست رزروها
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/Services/Index">
-                            <span class="fa fa-book" aria-hidden="true"></span><br>سرویس ها
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/Main/Jobs">
-                            <span class="fa fa-map-marker" aria-hidden="true"></span><br>شغل‌ها
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        }
-
-
-        else if (Session["userRole"].ToString() == "Admin")
-        {
-
-            <div class="sidebar col-xs-2">
-                <ul class="nav nav-sidebar">
-                    <li>
-                        <a href="~/Admin/Index">
-                            <span class="fa fa-book" aria-hidden="true"></span><br>پنل ادمین
-                        </a>
-                    </li>
-                    <hr>
-                </ul>
-            </div>
-        }
-        else
-        {
-            <div class="sidebar col-xs-2">
-                <ul class="nav nav-sidebar">
-                    <li>
-                        <a href="~/Home/Index">
-                            <span class="fa fa-home" aria-hidden="true"></span><br>خانه
-                        </a>
-                    </li>
-
-                    <hr>
-
-                    <li>
-                        <a href="~/Main/Jobs">
-                            <span class="fa fa-map-marker" aria-hidden="true"></span><br>مشاغل
-                        </a>
-                    </li>
-
-                    <hr>
-
-                    <li>
-                        <a href="~/Main/Reservations">
-                            <span class="fa fa-book" aria-hidden="true"></span><br>رزروهای آتی
-                        </a>
-                    </li>
-
-                    <hr />
-
-                    <li>
-                        <a href="~/AboutUs.html">
-                            <span class="fa fa-info-circle" aria-hidden="true"></span><br>درباره ما
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        }
-
-        @RenderSection("featured", required: false)
-        <div class="container-fluid col-sm-10 col-md-10 col-xs-10">
-            @RenderBody()
         </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
