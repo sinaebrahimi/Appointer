@@ -4589,11 +4589,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-<<<<<<< HEAD
   background-color: #222;
-=======
-  background-color: #428bca; /*//#3a87ad!important;*/
->>>>>>> origin/master
   border-color: #080808;
 }
 .navbar-inverse .navbar-brand {
@@ -4608,12 +4604,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #9d9d9d;
 }
 .navbar-inverse .navbar-nav > li > a {
-<<<<<<< HEAD
   color: #9d9d9d;
-=======
-  /*color: #999999;*/
-  color: #ffffff;
->>>>>>> origin/master
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
