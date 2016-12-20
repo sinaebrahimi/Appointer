@@ -24,48 +24,23 @@
 
 body {
     font-family: 'IRANSans', 'Web Yekan', Tahoma, sans-serif !important;
-    font-size: 15px;
-    padding-top: 50px;
-    background-color: white;
-    color: black;
-}
-
-h4 {
-    color: #ff515b;
-    font-size: 19px;
-    font-weight: bold;
-}
-
-.navbar {
-    font-size: 13px;
-    background-color: black;
-    color: white;
-}
-
-.navbar-collapse .navbar-nav > li > a {
-    color: white;
-    background-color: black;
-}
-
-.navbar-collapse .navbar-nav > li > a:hover,
-.navbar-collapse .navbar-nav > li > a:focus {
-    background-color: #ff515b;
-    color: white;
-}
-
-.navbar .fa {
     font-size: 17px;
-    color: white;
 }
 
-.navbar .navbar-inverse {
-    background-color: black;
+.sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
 }
 
 .navbar-fixed-top {
     border: 0;
-    height: 50px;
 }
+
+.navbar .fa {
+    font-size: 20px;
+    padding: 15px 15px;
+}
+
 
 .sidebar {
     display: none;
@@ -74,7 +49,7 @@ h4 {
     width: 125px;
     top: 50px;
     line-height: 25px;
-    background-color: #eef1f6;
+    background-color: #ecf0f1;
     list-style: none;
 }
 
@@ -89,7 +64,7 @@ h4 {
         padding: 20px;
         overflow-x: hidden;
         overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-        background-color: #eef1f6;
+        background-color: #f5f5f5;
         border-left: 1px solid #eee;
     }
 }
@@ -101,20 +76,11 @@ h4 {
     padding: 15px 20px 15px 20px;
 }
 
-    .nav-sidebar > li > a {
-        color: black;
-    }
-
-    .nav-sidebar > li > a:hover {
-        color: white;
-        background-color: #ff515b;
-    }
-
     .nav-sidebar > .active > a,
     .nav-sidebar > .active > a:hover,
     .nav-sidebar > .active > a:focus {
-        color: white;
-        background-color: #ff515b;
+        color: #fff;
+        background-color: #18BC9C;
     }
 
 .jumbotron {
@@ -123,36 +89,11 @@ h4 {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    color: white;
+    color: #fff;
+    padding: 100px 25px;
+    margin: -35px -120px;
+    font-family: 'IRANSans', 'Web Yekan', Tahoma, sans-serif !important;
 }
-
-.placeholders {
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-    .placeholders h4 {
-        margin-bottom: 0;
-    }
-
-.placeholder {
-    margin-bottom: 20px;
-}
-
-    .placeholder img {
-        display: inline-block;
-        border-radius: 5%;
-    }
-
-.btn-sina {
-    background-color: #ff515b;
-    color: white;
-}
-
-    .btn-sina:hover {
-        background-color: #ff515b;
-        color: black;
-    }
 
 .footer-bottom {
     font-size: small;
