@@ -4,42 +4,40 @@
     Layout = "~/Views/shared/_layout.cshtml";
 }
 
-<hr />
-<br/>
-<br/>
-<div class="jumbotron text-center">
-    <h1>منشی دیجیتال</h1>
-    <p>رزرو وقت و مدیریت زمان</p>
-    <a href="~/Main/Jobs" class="btn btn-default" style="z-index: 999;" data-toggle="modal" data-target="#pursuanceModal">جستجوی مشاغل</a>
+<div class="row">
+    <div class="jumbotron text-center">
+        <h1>منشی دیجیتال</h1>
+        <p>رزرو وقت و مدیریت زمان</p>
+        <a href="~/Main/Jobs" class="btn btn-default" style="z-index: 999;" data-toggle="modal" data-target="#pursuanceModal">جستجوی مشاغل</a>
 
+    </div>
 </div>
 
-
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-sm-3 col-md-4 col-xs-4">
         <h2 class="text-center">پیرایش</h2>
         <p class="text-center center-block">
-            <img src="~/Files/barber.png" alt="Barber" style="width:204px;height:204px;">
+            <img src="~/Content/img/barber.png" alt="Barber" style="width:204px;height:204px;">
         </p>
         <p class="text-center center-block">
             @Html.ActionLink("آرایشگاه ها", "Jobs", "Main", new { jobtype = "پیرایش" }, htmlAttributes: new { @class = "btn btn-default" })
         </p>
 
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-3 col-md-4 col-xs-4">
         <h2 class="text-center">تجارت</h2>
         <p class="text-center center-block">
-            <img src="~/Files/business.png" alt="Business" style="width:204px;height:204px;">
+            <img src="~/Content/img/business.png" alt="Business" style="width:204px;height:204px;">
         </p>
         <p class="text-center center-block">
             @Html.ActionLink("تاجران", "Jobs", "Main", new { jobtype = "تجارت" }, htmlAttributes: new { @class = "btn btn-default" })
         </p>
 
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-3 col-md-4 col-xs-4">
         <h2 class="text-center">پزشکی</h2>
         <p class="text-center center-block">
-            <img src="~/Files/doctor.png" alt="Medical" style="width:204px;height:204px;">
+            <img src="~/Content/img/doctor.png" alt="Medical" style="width:204px;height:204px;">
         </p>
         <p class="text-center center-block">
             @Html.ActionLink("پزشکان", "Jobs", "Main", new { jobtype = "پزشکی" }, htmlAttributes: new { @class = "btn btn-default" })
@@ -51,25 +49,24 @@
 
 @section styles{
 
-<style>
-  .jumbotron {
-      background: url("../Files/index.jpg") no-repeat center center fixed;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-      /*background-color: #f4511e;*/
-      color: #fff;
-      padding: 100px 25px;
-      margin: -35px -120px;
-      font-family: 'IRANSans', Tahoma, sans-serif !important;
-      /*font-family: 'Web Yekan', 'IRANSansLight', Tahoma, sans-serif !important;*/
-  }
+    <style>
+        .jumbotron {
+            background: url("../Content/img/index.jpg") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            /*background-color: #f4511e;*/
+            color: #fff;
+            padding: 100px 25px;
+            margin: -35px -120px;
+            font-family: 'IRANSans', Tahoma, sans-serif !important;
+            /*font-family: 'Web Yekan', 'IRANSansLight', Tahoma, sans-serif !important;*/
+        }
 
-    .row{
-        
-      margin: 50px;
-    }
-</style>
+        .row {
+            margin: 50px;
+        }
+    </style>
 
 }

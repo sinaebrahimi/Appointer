@@ -18,7 +18,7 @@
     <meta name="twitter:site" content="Appointer" />
     <meta name="twitter:creator" content="Sina_Ebrahimi" />
     <meta name="twitter:url" content="http://Appointer.com/" />
-    <meta name="twitter:image" content="img/114x114.png" />
+    <meta name="twitter:image" content="~/Content/img/114x114.png" />
 
     <meta property="og:title" content="" />
     <meta property="og:type" content="" />
@@ -27,19 +27,18 @@
     <meta property="og:description" content="" />
     <meta property="og:locale" content="fa_IR" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:image" content="img/114x114.png" />
+    <meta property="og:image" content="~/Content/img/114x114.png" />
 
     <link rel="icon" type="image/ico" href="favicon.ico">
     <link rel="icon" type="image/png" href="img/114x114.png"><!-- Opera Speed Dial, at least 144×114 px -->
-    <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="img/57x57.png"><!-- iPhone -->
-    <link rel="apple-touch-icon" type="image/png" sizes="79x79" href="img/79x79.png"><!-- iPad -->
-    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="img/114x114.png"><!-- iPhone4 -->
+    <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="~/Content/img/57x57.png"><!-- iPhone -->
+    <link rel="apple-touch-icon" type="image/png" sizes="79x79" href="~/Content/img/79x79.png"><!-- iPad -->
+    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="~/Content/img/114x114.png"><!-- iPhone4 -->
 
     <link rel="canonical" href="http://Appointer.com/" />
 
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
     @RenderSection("styles", required: false)
 </head>
 <body>
@@ -47,8 +46,8 @@
     <div id="body">
         @if (Session["userRole"] == null)
         {
-            <div class="sidebar">
-                <ul class="sidebar-menu">
+            <div class="sidebar col-xs-2">
+                <ul class="nav nav-sidebar">
                     <li>
                         <a href="~/Home/Index">
                             <span class="fa fa-home" aria-hidden="true"></span><br>خانه
@@ -75,8 +74,8 @@
         }
         else if (Session["userRole"].ToString() == "JobCorp")
         {
-            <div class="sidebar">
-                <ul class="sidebar-menu">
+            <div class="sidebar col-xs-2">
+                <ul class="nav nav-sidebar">
                     <li>
                         <a href="~/JCDashboard/AddWorkingTime">
                             <span class="fa fa-home" aria-hidden="true"></span><br>روزهای‌کاری هفتگی
@@ -112,8 +111,8 @@
         else if (Session["userRole"].ToString() == "JobOwner")
         {
 
-            <div class="sidebar">
-                <ul class="sidebar-menu">
+            <div class="sidebar col-xs-2">
+                <ul class="nav nav-sidebar">
                     <li>
                         <a href="~/Jobs/Edit">
                             <span class="fa fa-book" aria-hidden="true"></span><br>ویرایش شغل
@@ -152,8 +151,8 @@
         else if (Session["userRole"].ToString() == "Admin")
         {
 
-            <div class="sidebar">
-                <ul class="sidebar-menu">
+            <div class="sidebar col-xs-2">
+                <ul class="nav nav-sidebar">
                     <li>
                         <a href="~/Admin/Index">
                             <span class="fa fa-book" aria-hidden="true"></span><br>پنل ادمین
@@ -165,8 +164,8 @@
         }
         else
         {
-            <div class="sidebar">
-                <ul class="sidebar-menu">
+            <div class="sidebar col-xs-2">
+                <ul class="nav nav-sidebar">
                     <li>
                         <a href="~/Home/Index">
                             <span class="fa fa-home" aria-hidden="true"></span><br>خانه
@@ -201,14 +200,14 @@
         }
 
         @RenderSection("featured", required: false)
-        <div class="main-container col-xs-12">
+        <div class="container-fluid col-sm-10 col-md-10 col-xs-10">
             @RenderBody()
         </div>
     </div>
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
     @RenderSection("scripts", required: false)
-    @RenderSection("JavaScript", required: false)
-    @RenderSection("CSS", required: false)
 
 </body>
 </html>

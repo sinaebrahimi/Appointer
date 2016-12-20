@@ -1,92 +1,98 @@
 ﻿@font-face {
-    font-family: 'IRANSans';
-    src: url('../../fonts/IRANSans.eot'); /* IE9 Compat Modes */
-    src: url('../../fonts/IRANSans.woff') format('woff'); /* Pretty Modern Browsers */
-    src: url('../../fonts/IRANSans.woff2') format('woff2'); /* Super Modern Browsers */
-    src: url('../../fonts/IRANSans.ttf') format('truetype'); /* Safari, Android, iOS */
+    font-family: 'IRANSansLight';
+    src: url('../fonts/IRANSansLight.eot');
+    src: url('../fonts/IRANSansLight.eot?#iefix') format('embedded-opentype'), url('../fonts/IRANSansLight.woff') format('woff'), url('../fonts/IRANSansLight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
-html,
-body,h1,h2,h3,h4 {
-    font-family: 'IRANSans', Tahoma, sans-serif !important;
-    font-size: 15px;
+@font-face {
+    font-family: 'IRANSansMedium';
+    src: url('../fonts/IRANSansMedium.eot');
+    src: url('../fonts/IRANSansMedium.eot?#iefix') format('embedded-opentype'), url('../fonts/IRANSansMedium.woff') format('woff'), url('../fonts/IRANSansMedium.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
 }
 
-ul {
-	/*list-style: none;
-	text-decoration: none;*/
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+@font-face {
+    font-family: 'Web Yekan';
+    src: url('../fonts/web_Yekan.eot');
+    src: url('../fonts/web_Yekan.eot?#iefix') format('embedded-opentype'), url('../fonts/web_Yekan.woff') format('woff'), url('../fonts/web_Yekan.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
-ul#menu li {
-    display:inline;
+body {
+    font-family: 'IRANSans', 'Web Yekan', Tahoma, sans-serif !important;
+    font-size: 17px;
 }
 
-a {
-    text-decoration: none !important;
+.sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
 }
 
-/*
-.nav > li > a {
-    padding: 12px 12px;
-}*/
-
-.dropdown-menu {
-    font-size: 13px;
+.navbar-fixed-top {
+    border: 0;
 }
 
-.dropdown-menu .fa {
-    font-size: 15px;
-}
-
-.navbar-inverse {
-    vertical-align: middle;
-    height: 50px;
-}
-
-.navbar-brand {
+.navbar .fa {
     font-size: 20px;
     padding: 15px 15px;
 }
 
-.sidebar-menu {
+
+.sidebar {
+    display: none;
     position: fixed;
     height: 100%;
-    width: 175px;
+    width: 125px;
     top: 50px;
     line-height: 25px;
     background-color: #ecf0f1;
+    list-style: none;
 }
 
-.sidebar-menu li{
-	padding:5px 20px;
-	border: red;
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 51px;
+        bottom: 0;
+        right: 0;
+        z-index: 1000;
+        display: block;
+        padding: 20px;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        background-color: #f5f5f5;
+        border-left: 1px solid #eee;
+    }
 }
 
-.sidebar-menu li:hover{
-	background: #18BC9C;
-	color: white;
+.nav-sidebar {
+    margin-left: -21px; /* 20px padding + 1px border */
+    margin-bottom: 20px;
+    margin-right: -20px;
+    padding: 15px 20px 15px 20px;
 }
 
-.sidebar-menu li:hover a{
-	color: white;
-}
+    .nav-sidebar > .active > a,
+    .nav-sidebar > .active > a:hover,
+    .nav-sidebar > .active > a:focus {
+        color: #fff;
+        background-color: #18BC9C;
+    }
 
-.sidebar-menu {
-  list-style: none;
-  padding: 0px;
-}
-.sidebar-menu > li > a {
-  padding: 10px 10px 10px 10px;
-  display: block;
-  text-align: center;
-}
-
-.main-container {
-    width: 75%;
-    left: 5%;
+.jumbotron {
+    background: url("../Content/img/index.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #fff;
+    padding: 100px 25px;
+    margin: -35px -120px;
+    font-family: 'IRANSans', 'Web Yekan', Tahoma, sans-serif !important;
 }
 
 .footer-bottom {
@@ -99,55 +105,4 @@ a {
     left: 0;
     bottom: 0;
     height: 20px;
-}
-
-.fa {
-    font-size: 25px;
-}
-
-.plus {
-    text-align: center;
-}
-
-.plus .fa {
-    font-size: 33px;
-}
-
-.nav .fa {
-    font-size: 20px;
-}
-
-.info-title {
-    font-size: 20px;
-    text-align: center;
-}
-
-.fullpage-form {
-    margin-left: 20%;
-    text-align: center;
-}
-
-.fullpage-form input{
-    width:100%;
-    margin-bottom: 20px;
-}
-
-.fullpage-form select{
-    width:75%;
-    margin-bottom: 20px;
-}
-
-.input-form {
-    padding: 15px 10px 15px 10px;
-    text-align: center;
-}
-
-.input-form input {
-    width:100%;
-    margin-bottom: 20px;
-}
-
-.input-form select{
-    width:75%;
-    margin-bottom: 20px;
 }
