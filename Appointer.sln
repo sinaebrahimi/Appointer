@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appointer", "Appointer\Appointer.csproj", "{14E7CD99-8A84-4F9E-8C18-A7CB2573B8B3}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "AppointerModelingProject1", "AppointerModelingProject1\AppointerModelingProject1.modelproj", "{3D7CDEBB-E4ED-4D0E-BF7A-134918DE187C}"
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "MyModelingProject1", "MyModelingProject1\MyModelingProject1.modelproj", "{B1453536-CE15-408E-AD1D-4398E086057F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{14E7CD99-8A84-4F9E-8C18-A7CB2573B8B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14E7CD99-8A84-4F9E-8C18-A7CB2573B8B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14E7CD99-8A84-4F9E-8C18-A7CB2573B8B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D7CDEBB-E4ED-4D0E-BF7A-134918DE187C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D7CDEBB-E4ED-4D0E-BF7A-134918DE187C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D7CDEBB-E4ED-4D0E-BF7A-134918DE187C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D7CDEBB-E4ED-4D0E-BF7A-134918DE187C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1453536-CE15-408E-AD1D-4398E086057F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1453536-CE15-408E-AD1D-4398E086057F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1453536-CE15-408E-AD1D-4398E086057F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1453536-CE15-408E-AD1D-4398E086057F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
