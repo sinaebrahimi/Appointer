@@ -23,7 +23,7 @@
 }
 
 body {
-    font-family: 'IRANSans', 'Web Yekan', Tahoma, sans-serif !important;
+    font-family: 'IRANSansLight', 'Web Yekan', Tahoma, sans-serif !important;
     font-size: 15px;
     padding-top: 50px;
     background-color: white;
@@ -31,6 +31,28 @@ body {
 }
 
 h4 {
+    font-family: 'IRANSansLight', 'Web Yekan', Tahoma, sans-serif !important;
+    color: #ff515b;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+h3 {
+    font-family: 'IRANSansLight', 'Web Yekan', Tahoma, sans-serif !important;
+    color: #ff515b;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+h2 {
+    font-family: 'IRANSansMedium', 'Web Yekan', Tahoma, sans-serif !important;
+    color: #ff515b;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+h1 {
+    font-family: 'IRANSansMedium', 'Web Yekan', Tahoma, sans-serif !important;
     color: #ff515b;
     font-size: 19px;
     font-weight: bold;
@@ -40,16 +62,19 @@ h4 {
     font-size: 13px;
     background-color: black;
     color: white;
+    z-index: 999;
 }
 
 .navbar-collapse .navbar-nav > li > a {
     color: white;
     background-color: black;
+    line-height: 15px;
 }
 
     .navbar-collapse .navbar-nav > li > a:hover,
     .navbar-collapse .navbar-nav > li > a:focus {
         background-color: #ff515b;
+        font-weight: bold;
         color: white;
     }
 
@@ -69,16 +94,18 @@ h4 {
 
 .sidebar {
     display: none;
+    z-index: 998;
 }
 
 @media (min-width: 768px) {
     .sidebar {
         position: fixed;
-        width: 10%;
+        width: 100px;
         line-height: 25px;
         top: 51px;
         bottom: 0;
         right: 0;
+        float: right;
         z-index: 1000;
         display: block;
         padding: 20px;
@@ -90,6 +117,7 @@ h4 {
 }
 
 .nav-sidebar {
+    text-align: center;
     margin-left: -21px; /* 20px padding + 1px border */
     margin-bottom: 20px;
     margin-right: -20px;
@@ -103,6 +131,7 @@ h4 {
         .nav-sidebar > li > a:hover {
             color: white;
             background-color: #ff515b;
+            font-weight: bold;
         }
 
     .nav-sidebar > .active > a,
@@ -110,6 +139,7 @@ h4 {
     .nav-sidebar > .active > a:focus {
         color: white;
         background-color: #ff515b;
+        font-weight: bold;
     }
 
 .main-countainer {
@@ -125,17 +155,21 @@ h4 {
 }
 
 .jumbotron {
-    background: url("../Content/img/index.jpg") no-repeat center center fixed;
+    background: url("../Content/img/index.jpg") no-repeat center bottom fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    height: 400px;
+    font-family: 'IRANSansMedium', 'Web Yekan', Tahoma, sans-serif !important;
     color: white;
+    z-index: 997;
 }
 
 .placeholders {
     margin-bottom: 30px;
     text-align: center;
+    z-index: 997;
 }
 
     .placeholders h4 {
@@ -159,10 +193,12 @@ h4 {
     .btn-sina:hover {
         background-color: #ff515b;
         color: black;
+        font-weight: bold;
+        z-index: 999;
     }
 
 .footer-bottom {
-    font-size: small;
+    font-family: 'IRANSansLight', 'Web Yekan', Tahoma, sans-serif !important;
     text-align: justify;
     overflow: hidden;
     background-color: #18BC9C;
