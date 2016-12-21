@@ -47,7 +47,7 @@
         <div id="body" class="row">
             @if (Session["userRole"] == null)
             {
-                <div class="sidebar col-xs-2">
+                <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
                         <li>
                             <a href="~/Home/Index">
@@ -75,7 +75,7 @@
             }
             else if (Session["userRole"].ToString() == "JobCorp")
             {
-                <div class="sidebar col-xs-2">
+                <div class="sidebar col-sm-3 col-md-2">
                     <ul class="nav nav-sidebar">
                         <li>
                             <a href="~/JCDashboard/AddWorkingTime">
@@ -112,7 +112,7 @@
             else if (Session["userRole"].ToString() == "JobOwner")
             {
 
-                <div class="sidebar col-xs-2">
+                <div class="sidebar col-sm-3 col-md-2">
                     <ul class="nav nav-sidebar">
                         <li>
                             <a href="~/Jobs/Edit">
@@ -152,7 +152,7 @@
             else if (Session["userRole"].ToString() == "Admin")
             {
 
-                <div class="sidebar col-xs-2">
+                <div class="sidebar col-sm-3 col-md-2">
                     <ul class="nav nav-sidebar">
                         <li>
                             <a href="~/Admin/Index">
@@ -165,7 +165,7 @@
             }
             else
             {
-                <div class="sidebar col-xs-2">
+                <div class="sidebar col-sm-3 col-md-2">
                     <ul class="nav nav-sidebar">
                         <li>
                             <a href="~/Home/Index">
@@ -201,7 +201,7 @@
             }
 
             @RenderSection("featured", required: false)
-            <div class="col-sm-10 col-md-10 col-xs-10">
+            <div class="main-countainer col-sm-10 col-md-11">
                 @RenderBody()
             </div>
         </div>
