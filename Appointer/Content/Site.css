@@ -26,78 +26,77 @@ body {
     font-family: 'IRANSansLight', 'Web Yekan', Tahoma, sans-serif !important;
     font-size: 15px;
     padding-top: 50px;
-    background-color: white;
-    color: black;
+    background-color: #fefefe;
+    color: #010101;
 }
 
 h4 {
     font-family: 'IRANSansLight', 'Web Yekan', Tahoma, sans-serif !important;
-    color: #ff0000;
+    color: #fe1010;
     font-size: 16px;
     font-weight: bold;
 }
 
 h3 {
     font-family: 'IRANSansLight', 'Web Yekan', Tahoma, sans-serif !important;
-    /*color: #ff515b;*/
-    color: #008200;
+    color: #fe1010;
     font-size: 17px;
     font-weight: bold;
 }
 
 h2 {
     font-family: 'IRANSansMedium', 'Web Yekan', Tahoma, sans-serif !important;
-   color: #008200;
+    color: #fe1010;
     font-size: 18px;
     font-weight: bold;
 }
 
 h1 {
     font-family: 'IRANSansMedium', 'Web Yekan', Tahoma, sans-serif !important;
-    color: #008200;
+    color: #fe1010;
     font-size: 19px;
     font-weight: bold;
 }
 
 
-    .navbar-nav > li > a {
-        color: white;
-    }
+.navbar-nav > li > a {
+    color: #fefefe;
+}
 
-        .navbar-nav > li > a:hover {
-           color: #008200;
-            /*color: white;*/
-            background-color: transparent;
-            font-weight: bold;
-        }
-
-    .navbar-nav > .active > a,
-    .navbar-nav > .active > a:hover,
-    .navbar-nav > .active > a:focus {
-        color: #008200;
-        /*background-color: #ff0000;*/
+    .navbar-nav > li > a:hover {
+        color: #fe1010;
+        /*color: #fefefe;*/
+        background-color: transparent;
         font-weight: bold;
     }
+
+.navbar-nav > .active > a,
+.navbar-nav > .active > a:hover,
+.navbar-nav > .active > a:focus {
+    color: #fe1010;
+    /*background-color: #fe1010;*/
+    font-weight: bold;
+}
 
 
 .navbar {
     font-size: 15px;
-    background-color: black;
-    /*color: white;*/
-    color: #008200;
+    background-color: #010101;
+    /*color: #fefefe;*/
+    color: #01aa10;
     z-index: 999;
 }
 
-/*.navbar-collapse .navbar-nav > li > a {
-    color: white;
-    background-color: black;
+    /*.navbar-collapse .navbar-nav > li > a {
+    color: #fefefe;
+    background-color: #010101;
     line-height: 15px;
 }
 
     .navbar-collapse .navbar-nav > li > a:hover,
     .navbar-collapse .navbar-nav > li > a:focus {
        
-       color: #008200;
+       color: #01aa10;
         font-weight: bold;
         
     }
@@ -105,28 +104,28 @@ h1 {
      .navbar-collapse .navbar-nav .fa > li > a:hover,
     .navbar-collapse .navbar-nav .fa > li > a:focus {
        
-       color: #008200;
+       color: #01aa10;
         font-weight: bold;
         
     }
 .navbar .fa {
     font-size: 15px;
-    color: white;
+    color: #fefefe;
 }
 .navbar .fa:hover,
 .navbar .fa:focus {
     font-size: 15px;
-    color: #008200;
+    color: #01aa10;
 }
 .navbar-nav > li > a:hover,
 .navbar-nav > li > a:focus{
-    color: #008200;
+    color: #01aa10;
     font-size: 15px;
 }*/
 
-.navbar .navbar-inverse {
-    background-color: black;
-}
+    .navbar .navbar-inverse {
+        background-color: #010101;
+    }
 
 .navbar-fixed-top {
     border: 0;
@@ -152,7 +151,7 @@ h1 {
         padding: 20px;
         overflow-x: hidden;
         overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-        background-color: #eef1f6;
+        background-color: #ededed;
         border-left: 1px solid #eee;
     }
 }
@@ -166,21 +165,21 @@ h1 {
 }
 
     .nav-sidebar > li > a {
-        color: black;
+        color: #010101;
     }
 
         .nav-sidebar > li > a:hover {
-           color: #008200;
-            /*color: white;*/
-            /*background-color: #ff0000;*/
+            color: #fe1010;
+            /*color: #fefefe;*/
+            /*background-color: #fe1010;*/
             font-weight: bold;
         }
 
     .nav-sidebar > .active > a,
     .nav-sidebar > .active > a:hover,
     .nav-sidebar > .active > a:focus {
-        color: #008200;
-        /*background-color: #ff0000;*/
+        color: #f8002f;
+        /*background-color: #fe1010;*/
         font-weight: bold;
     }
 
@@ -204,7 +203,7 @@ h1 {
     background-size: cover;
     height: 400px;
     font-family: 'IRANSansMedium', 'Web Yekan', Tahoma, sans-serif !important;
-    color: white;
+    color: #fefefe;
     z-index: 997;
 }
 
@@ -227,14 +226,14 @@ h1 {
         border-radius: 5%;
     }
 
-.btn-sina {
-    background-color: #ff0000;
-    color: white;
+.btn-default-custom {
+    background-color: #10aa10;
+    color: #fefefe;
 }
 
-    .btn-sina:hover {
-        background-color: #ff0000;
-        color: black;
+    .btn-default-custom:hover {
+        background-color: #01aa10;
+        color: #010101;
         font-weight: bold;
         z-index: 999;
     }
@@ -243,7 +242,7 @@ h1 {
     font-family: 'IRANSansLight', 'Web Yekan', Tahoma, sans-serif !important;
     text-align: justify;
     overflow: hidden;
-    background-color: #18BC9C;
+    background-color: #ededed;
     position: fixed;
     right: 175px;
     left: 0;
