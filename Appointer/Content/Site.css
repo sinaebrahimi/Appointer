@@ -32,40 +32,63 @@ body {
 
 h4 {
     font-family: 'IRANSansLight', 'Web Yekan', Tahoma, sans-serif !important;
-    color: #ff515b;
+    color: #ff0000;
     font-size: 16px;
     font-weight: bold;
 }
 
 h3 {
     font-family: 'IRANSansLight', 'Web Yekan', Tahoma, sans-serif !important;
-    color: #ff515b;
+    /*color: #ff515b;*/
+    color: #008200;
     font-size: 17px;
     font-weight: bold;
 }
 
 h2 {
     font-family: 'IRANSansMedium', 'Web Yekan', Tahoma, sans-serif !important;
-    color: #ff515b;
+   color: #008200;
     font-size: 18px;
     font-weight: bold;
 }
 
 h1 {
     font-family: 'IRANSansMedium', 'Web Yekan', Tahoma, sans-serif !important;
-    color: #ff515b;
+    color: #008200;
     font-size: 19px;
     font-weight: bold;
 }
 
+
+    .navbar-nav > li > a {
+        color: white;
+    }
+
+        .navbar-nav > li > a:hover {
+           color: #008200;
+            /*color: white;*/
+            background-color: transparent;
+            font-weight: bold;
+        }
+
+    .navbar-nav > .active > a,
+    .navbar-nav > .active > a:hover,
+    .navbar-nav > .active > a:focus {
+        color: #008200;
+        /*background-color: #ff0000;*/
+        font-weight: bold;
+    }
+
+
 .navbar {
-    font-size: 13px;
+    font-size: 15px;
     background-color: black;
-    color: white;
+    /*color: white;*/
+    color: #008200;
     z-index: 999;
 }
 
-.navbar-collapse .navbar-nav > li > a {
+/*.navbar-collapse .navbar-nav > li > a {
     color: white;
     background-color: black;
     line-height: 15px;
@@ -73,15 +96,33 @@ h1 {
 
     .navbar-collapse .navbar-nav > li > a:hover,
     .navbar-collapse .navbar-nav > li > a:focus {
-        background-color: #ff515b;
+       
+       color: #008200;
         font-weight: bold;
-        color: white;
+        
     }
 
+     .navbar-collapse .navbar-nav .fa > li > a:hover,
+    .navbar-collapse .navbar-nav .fa > li > a:focus {
+       
+       color: #008200;
+        font-weight: bold;
+        
+    }
 .navbar .fa {
-    font-size: 17px;
+    font-size: 15px;
     color: white;
 }
+.navbar .fa:hover,
+.navbar .fa:focus {
+    font-size: 15px;
+    color: #008200;
+}
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus{
+    color: #008200;
+    font-size: 15px;
+}*/
 
 .navbar .navbar-inverse {
     background-color: black;
@@ -129,16 +170,17 @@ h1 {
     }
 
         .nav-sidebar > li > a:hover {
-            color: white;
-            background-color: #ff515b;
+           color: #008200;
+            /*color: white;*/
+            /*background-color: #ff0000;*/
             font-weight: bold;
         }
 
     .nav-sidebar > .active > a,
     .nav-sidebar > .active > a:hover,
     .nav-sidebar > .active > a:focus {
-        color: white;
-        background-color: #ff515b;
+        color: #008200;
+        /*background-color: #ff0000;*/
         font-weight: bold;
     }
 
@@ -186,12 +228,12 @@ h1 {
     }
 
 .btn-sina {
-    background-color: #ff515b;
+    background-color: #ff0000;
     color: white;
 }
 
     .btn-sina:hover {
-        background-color: #ff515b;
+        background-color: #ff0000;
         color: black;
         font-weight: bold;
         z-index: 999;
