@@ -114,7 +114,7 @@
                     {
                         $(".ajaxRes").html(response.dow + "<span> از </span>" + response.StartTime + "<span> تا </span>" + response.EndTime + "<br/>" + response.JobTitle + "<br/>" + response.JobCorp);
                         if (response.ap.length > 0) {
-                            $(".ajaxRes").append("<hr><span style='color:blue;'>دیگر قرارهای این روز</span><br/>");
+                            $(".ajaxRes").append("<hr><span style='color:red;'>دیگر قرارهای این روز</span><br/>");
                         }
                         for (var j = 0; j < response.ap.length ; j++) {
                             $(".ajaxRes").append(response.ap[j].StartHour + " تا " + response.ap[j].EndHour + "<br/>");
