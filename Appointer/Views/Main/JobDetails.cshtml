@@ -5,22 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2 class="text-center" style="color:#10aa10">@Html.DisplayFor(model => model.Title)</h2>
 <hr />
 <br />
 <div>
 
 
     <dl class="main-container">
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        
-        <hr />
 
         <dt>
             @Html.DisplayNameFor(model => model.JobPhone)

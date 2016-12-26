@@ -30,7 +30,7 @@ namespace Appointer.Models
         [Display(Name = "عنوان شغل")]
         public int JobId { get; set; }
 
-        
+        [Display(Name = "سمت اجرابی")]
         public string RoleTitle { get; set; }
     
         public virtual Job Job { get; set; }
