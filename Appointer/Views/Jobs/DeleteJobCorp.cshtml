@@ -1,16 +1,15 @@
 ﻿@model Appointer.Models.JobCorp
 
 @{
-    ViewBag.Title = "DeleteJobCorp";
+    ViewBag.Title = "حذف همکار";
 }
 
-<h2>Delete</h2>
+<h2>حذف همکار</h2>
 
 <h3>آیا از حذف همکار زیر مطمئن هستید؟</h3>
 <div>
-    <h4>JobCorp</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="main-countainer">
         <dt>
             @Html.DisplayNameFor(model => model.User.FullName)
         </dt>
@@ -43,8 +42,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="DeleteJobCorp" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "JobCorpsList")
+            <input type="submit" value="حذف همکار" class="btn btn-danger" /> |
+            @Html.ActionLink("بازگشت به لیست همکاران", "JobCorpsList")
         </div>
     }
 </div>

@@ -6,11 +6,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>لغو قرار</h2>
 
-<h2>لغو ملاقات</h2>
 
-
-<h3>آیا از کنسل کردن قرار خود اطمینان دارید؟</h3>
+<h5>آیا از کنسل کردن قرار خود اطمینان دارید؟</h5>
 <div>
     <hr />
     <dl class="main-container">
@@ -107,9 +106,12 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        
-            <input type="submit" value="AppointmentCancellation" class="btn btn-sm btn-primary btn-block" />
-        
+
+        <div class="form-actions no-color">
+            <input type="submit" value="لغو" class="btn btn-danger" />|
+            @Html.ActionLink("لیست قرارها", "AppointmentList")
+        </div>
+
     }
 
 </div>

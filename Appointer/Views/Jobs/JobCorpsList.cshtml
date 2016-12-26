@@ -9,57 +9,59 @@
 }
 
 
-
-<div class="info">
+<div class="info text-center">
     <div class="info-title"><strong>لیست همکاران</strong></div>
     <hr>
 </div>
 
-<div>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-        <table class="table form-control">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.User.FullName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.User.Phone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RoleTitle)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (Appointer.Models.JobCorp jc in ViewBag.JobCorps)
-                {
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => jc.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => jc.User.FullName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => jc.User.Phone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => jc.RoleTitle)
-                    </td>
-                    <td>
-                        @Html.ActionLink("حذف همکار", "DeleteJobCorp", new { id = jc.Id })
-                    </td>
+                    <th class="text-right">
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th class="text-right">
+                        @Html.DisplayNameFor(model => model.User.FullName)
+                    </th>
+                    <th class="text-right">
+                        @Html.DisplayNameFor(model => model.User.Phone)
+                    </th>
+                    <th class="text-right">
+                        @Html.DisplayNameFor(model => model.RoleTitle)
+                    </th>
+                    <th></th>
                 </tr>
-            }
+            </thead>
+                @foreach (Appointer.Models.JobCorp jc in ViewBag.JobCorps)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => jc.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => jc.User.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => jc.User.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => jc.RoleTitle)
+                        </td>
+                        <td>
+                            @Html.ActionLink("حذف همکار", "DeleteJobCorp", new { id = jc.Id })
+                        </td>
+                    </tr>
+                }
         </table>
-    }
-</div>
+    </div>
+}
+<h5>برای افزودن همکاران از سمت راست منو، ویرایش شغل را انتخاب کرده و کلید ثبت نام برای همکاران تعریف کنید</h5>
+
 
 
 

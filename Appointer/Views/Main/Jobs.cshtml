@@ -5,7 +5,6 @@
 
     Layout = "~/Views/shared/_layout.cshtml";
 }
-<hr />
 <br />
 <h2>جستجوی مشاغل</h2>
 <hr />
@@ -24,6 +23,7 @@
             <div class="col-lg-3">
 
                 <div class="col-lg-10">
+                    <span class="fa fa-flag" aria-hidden="true"></span>
 
                     <select name="jobtype" id="jobtype">
                         <option style="color:red" value="">نوع شغل</option>
@@ -34,13 +34,14 @@
                     </select>
 
                 </div>
-                @*<label class="col-md-2">نوع‌شغل</label>*@
             </div>
 
 
 
             <div class="col-lg-3">
                 <div class="col-lg-10">
+                    <span class="fa fa-map-marker" aria-hidden="true"></span>
+
                     <select name="city" id="city">
                         <option class="text-success" value="">شهر</option>
                         @foreach (Appointer.Models.City cities in ViewBag.cities)
@@ -51,15 +52,17 @@
 
                 </div>
 
-                @*<label class="col-md-2">شهر</label>*@
             </div>
 
             <div class="col-lg-3">
                 <div class="col-lg-10">
+                    
+
+                    <span class="fa fa-briefcase" aria-hidden="true">
                     <input type="text" name="title" id="title" placeholder="نام شغل" />
+                    </span>
                 </div>
 
-                @*<label class="col-md-2">نام‌شغل</label>*@
             </div>
 
 

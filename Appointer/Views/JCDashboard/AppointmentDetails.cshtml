@@ -5,12 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<h2>جزئیات ملاقات</h2>
-
+<h2 class="text-center">جزئیات ملاقات</h2>
+<hr />
 <div>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="main-container">
 
         <dt>
             @Html.DisplayNameFor(model => model.BookDate)
@@ -20,13 +19,17 @@
             @Html.DisplayFor(model => model.BookDate)
         </dd>
 
+        <br />
+
         <dt>
-            @Html.DisplayNameFor(model => model.StartTime)
+            @Html.DisplayName("تاریخ")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.StartTime)
         </dd>
+
+        <br />
 
         <dt>
             @Html.DisplayName("ساعت شروع")
@@ -35,6 +38,8 @@
         <dd>
             @Html.DisplayFor(model => model.StartTime.TimeOfDay)
         </dd>
+
+        <br />
 
 
         <dt>
@@ -45,6 +50,8 @@
             @Html.DisplayFor(model => model.EndTime.TimeOfDay)
         </dd>
 
+        <br />
+
         <dt>
             @Html.DisplayNameFor(model => model.Service.Title)
         </dt>
@@ -52,6 +59,8 @@
         <dd>
             @Html.DisplayFor(model => model.Service.Title)
         </dd>
+
+        <br />
 
         <dt>
             @Html.DisplayNameFor(model => model.Service.Duration)
@@ -61,6 +70,8 @@
             @Html.DisplayFor(model => model.Service.Duration)
         </dd>
 
+        <br />
+
         <dt>
             @Html.DisplayNameFor(model => model.User.FullName)
         </dt>
@@ -69,6 +80,8 @@
             @Html.DisplayFor(model => model.User.FullName)
         </dd>
 
+        <br />
+
         <dt>
             @Html.DisplayNameFor(model => model.User.Phone)
         </dt>
@@ -76,6 +89,8 @@
         <dd>
             @Html.DisplayFor(model => model.User.Phone)
         </dd>
+        <br />
+
         <dt>
             @Html.DisplayNameFor(model => model.User.City.Name)
         </dt>
@@ -83,6 +98,8 @@
         <dd>
             @Html.DisplayFor(model => model.User.City.Name)
         </dd>
+        <br />
+
         <dt>
             @Html.DisplayNameFor(model => model.User.Email)
         </dt>
@@ -90,6 +107,8 @@
         <dd>
             @Html.DisplayFor(model => model.User.Email)
         </dd>
+        <br />
+
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
@@ -97,6 +116,8 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
+        <br />
+
 
 
     </dl>

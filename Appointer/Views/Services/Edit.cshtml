@@ -1,57 +1,49 @@
 ﻿@model Appointer.Models.Service
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "ویرایش سرویس";
 }
 
-
-<hr />
-<h3></h3>
-<br />
-<div class="fullpage-form">
-    <div class="info">
-        <div class="info-title"><strong>ویرایش سرویس</strong></div>
-        <hr>
-    </div>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+<div class="info text-center">
+    <div class="info-title"><strong>ویرایش سرویس</strong></div>
+    <hr>
+</div>
+@using (Html.BeginForm("Edit", "Services", FormMethod.Post, new { @class = "form-horizontal text-center" }))
+{
+    @Html.AntiForgeryToken()
 
 
-        <div class="col-sm-4 col-sm-offset-4">
-            <div class="col-xs-12">
-                @Html.ValidationSummary()
-                @Html.HiddenFor(model => model.Id)
+    @Html.ValidationSummary()
+    @Html.HiddenFor(model => model.Id)
 
-                @Html.LabelFor(model => model.Title)
-                <br />
-                @Html.EditorFor(model => model.Title)
-                @Html.ValidationMessageFor(model => model.Title)
-                <br />
+    @Html.LabelFor(model => model.Title)
+    <br />
+    @Html.EditorFor(model => model.Title)
+    @Html.ValidationMessageFor(model => model.Title)
+    <br />
 
 
 
                 @Html.LabelFor(model => model.Duration)
                 <br />
                 @Html.EditorFor(model => model.Duration)
+                <br />
                 @Html.ValidationMessageFor(model => model.Duration)
                 <br />
 
                 @Html.LabelFor(model => model.Description)
                 <br />
                 @Html.EditorFor(model => model.Description)
+                <br />
                 @Html.ValidationMessageFor(model => model.Description)
                 <br />
 
-            </div>
-            <div class="col-xs-8 col-xs-offset-2">
-                <button class="btn btn-sm btn-primary btn-block" type="submit" value="Edit">ویرایش سرویس</button>
-            </div>
-        </div>
-    }
+                <button class="btn btn-default-custom" type="submit" value="Edit">ویرایش سرویس</button>
+
+}
 
 
 </div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

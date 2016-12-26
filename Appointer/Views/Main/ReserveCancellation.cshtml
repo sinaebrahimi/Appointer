@@ -9,9 +9,8 @@
 <h2>لغو قرار</h2>
 
 
-<h3>آیا از کنسل کردن قرار خود اطمینان دارید؟</h3>
+<h5>آیا از کنسل کردن قرار خود اطمینان دارید؟</h5>
 <div>
-    <h4>قرار</h4>
     <hr />
     <dl class="main-container">
         <dt>
@@ -84,7 +83,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="ReserveCancellation" class="btn btn-sm btn-primary btn-block" /> |
+            <input type="submit" value="لغو" class="btn btn-danger" /> |
             @Html.ActionLink("لیست قرارها", "Reservations")
         </div>
     }

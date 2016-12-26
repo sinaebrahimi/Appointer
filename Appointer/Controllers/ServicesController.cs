@@ -18,17 +18,27 @@ namespace Appointer.Controllers
         // GET: Services
         public ActionResult Index()
         {
+            //if (SessionPersister.UserRole.ToString() == "JobCorp" || SessionPersister.UserRole.ToString() == "JobOwner")
+            //{
+
+
+
+            //JobCorp jc = new JobCorp();
+            //var u = Int32.Parse(Session["userId"].ToString());
+            //jc = db.JobCorps.Where(acc => acc.UserId ==u).FirstOrDefault();
+            ////var services = db.Services.Include(s => s.JobCorp);
+            //var services = db.Services.Where(acc => acc.JobCorpId == jc.Id);
+            //return View(services.ToList());
+            //}
+            if (SessionPersister.UserRole.ToString() == "Admin")
+            {
+                var jobs = db.Jobs.ToList();
+                return View(jobs);
+            }
             if (SessionPersister.UserRole.ToString() == "JobCorp" || SessionPersister.UserRole.ToString() == "JobOwner")
             {
 
-
-            
-            JobCorp jc = new JobCorp();
-            var u = Int32.Parse(Session["userId"].ToString());
-            jc = db.JobCorps.Where(acc => acc.UserId ==u).FirstOrDefault();
-            //var services = db.Services.Include(s => s.JobCorp);
-            var services = db.Services.Where(acc => acc.JobCorpId == jc.Id);
-            return View(services.ToList());
+                return RedirectToAction("Index", "JCDashboard");
             }
 
             else
@@ -131,8 +141,15 @@ namespace Appointer.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Service service = db.Services.Find(id);
-            db.Services.Remove(service);
-            db.SaveChanges();
+            try
+            {
+                db.Services.Remove(service);
+                db.SaveChanges();
+            }
+            catch (InvalidOperationException)
+            {
+                ViewBag.Error = "به علت رزرو شدن این سرویس توسط کاربران نمی‌توانید آن را حذف کنید";
+            }
             return RedirectToAction("Index");
         }
 

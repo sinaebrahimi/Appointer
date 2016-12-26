@@ -5,22 +5,18 @@
     Layout = "~/Views/shared/_layout.cshtml";
 }
 
-<div class="fullpage-form">
-    <div class="info">
+    <div class="info text-center">
         <div class="info-title"><strong>افزودن شغل</strong></div>
         <hr>
     </div>
 
     @ViewBag.Error
     @ViewBag.Message
-    @using (Html.BeginForm("Create", "Jobs", FormMethod.Post))
+    @using (Html.BeginForm("Create", "Jobs", FormMethod.Post, new { @class = "form-horizontal text-center" }))
     {
         @Html.AntiForgeryToken()
         
-
-        <div class="col-sm-4 col-sm-offset-4">
-            <div class="col-xs-12">
-
+        
 
                 @Html.LabelFor(model => model.Title)
                 <br />
@@ -43,7 +39,6 @@
                 <br />
 
 
-                <br />
                 @Html.LabelFor(model => model.CityId)
                 <br />
                 <select name="CityId" id="CityId">
@@ -54,6 +49,7 @@
                 </select>
                 <br />
 
+                <br />
 
                 @Html.LabelFor(model => model.JobTypeId)
                 <br />
@@ -63,6 +59,7 @@
                         <option value="@jt.Id">@jt.Title</option>
                     }
                 </select>
+                <br />
                 <br />
                 @*Html.LabelFor(model => model.JobTypeId)
                 <br />
@@ -74,16 +71,12 @@
                 @Html.TextAreaFor(m => m.About)
                 <br />
                 <br />
-            </div>
-
-            <div class="col-xs-8 col-xs-offset-2">
-                <button class="btn btn-sm btn-primary btn-block" type="submit" value="Create">ثبت شغل</button>
-            </div>
-
-        </div>
+                
+                <button class="btn btn-default-custom" type="submit" value="Create">ثبت شغل</button>
+          
+                
 
     }
-</div>
 
 
 

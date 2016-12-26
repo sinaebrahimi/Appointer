@@ -27,7 +27,7 @@ namespace Appointer.Models
         [Display(Name = "همکار")]
         public int JobCorpId { get; set; }
 
-        [Display(Name = "زمان ارائه")]
+        [Display(Name = "زمان ارائه سرویس")]
         public int Duration { get; set; }
 
 

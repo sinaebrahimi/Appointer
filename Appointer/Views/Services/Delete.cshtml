@@ -1,71 +1,71 @@
 ﻿@model Appointer.Models.Service
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "حذف سرویس";
 }
 
-<h2>Delete</h2>
 
-<h3>آیا از حذف سرویس زیر مطمئن هستید؟</h3>
 
-<div class="fullpage-form">
+<h2>حذف سرویس</h2>
+
+
+<h5>آیا از حذف کردن سرویس خود اطمینان دارید؟</h5>
+
+@ViewBag.Error
+@ViewBag.Message
+<div>
 
     <hr />
 
 
-    <div class="col-sm-4 col-sm-offset-4">
-        <div class="col-xs-12">
-            <dl class="main-container">
+    <dl class="main-container">
 
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Title)
-                </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Title)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
 
-                <hr />
-                <dt>
-                    @Html.DisplayNameFor(model => model.Duration)
-                </dt>
+        <hr />
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Duration)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
 
 
 
-                <hr />
-                <dt>
-                    @Html.DisplayNameFor(model => model.JobCorp.RoleTitle)
-                </dt>
+        <hr />
+        <dt>
+            @Html.DisplayNameFor(model => model.JobCorp.RoleTitle)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.JobCorp.RoleTitle)
-                </dd>
-                <hr />
-                <dt>
-                    @Html.DisplayNameFor(model => model.Description)
-                </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JobCorp.RoleTitle)
+        </dd>
+        <hr />
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Description)
-                </dd>
-            </dl>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button class="btn btn-danger" type="submit" value="Delete">حذف سرویس</button>
         </div>
+    }
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="col-xs-8 col-xs-offset-2">
-                <button class="btn btn-sm btn-danger btn-block" type="submit" value="حذف سرویس">حذف سرویس</button>
-            </div>
-        }
-
-    </div>
 
 
 

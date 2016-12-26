@@ -5,35 +5,32 @@
     Layout = "~/Views/shared/_layout.cshtml";
 }
 
-<div class="fullpage-form">
-    <div class="info">
+    <div class="info text-center">
         <div class="info-title"><strong>ویرایش شغل</strong></div>
         <hr>
     </div>
 
     @ViewBag.Error
     @ViewBag.Message
-    @using (Html.BeginForm("Edit", "Jobs", FormMethod.Post))
+    @using (Html.BeginForm("Edit", "Jobs", FormMethod.Post, new { @class = "form-horizontal text-center" }))
     {
         @Html.AntiForgeryToken()
 
-
-        <div class="col-sm-4 col-sm-offset-4">
-            <div class="col-xs-12">
+        
 
                 @Html.HiddenFor(model => model.Id)
 
                 @Html.LabelFor(model => model.Title)
                 <br />
                 @Html.EditorFor(model => model.Title)
-                
+        <br />
                 @Html.ValidationMessageFor(model => model.Title)
 
                 <br />
                 @Html.LabelFor(model => model.JobPhone)
                 <br />
                 @Html.EditorFor(m => m.JobPhone, new { maxlength = "11", onkeyup = "this.value = this.value.replace(/[^0-9]/, '')" })
-                
+        <br />
                 @Html.ValidationMessageFor(model => model.JobPhone)
                 <br />
 
@@ -42,7 +39,7 @@
                 <br />
                 @Html.EditorFor(m => m.Address)
                 <br />
-
+                <br />
 
                 @Html.LabelFor(model => model.CityId)
                 <br />
@@ -53,7 +50,7 @@
                     }
                 </select>
                 <br />
-
+                <br />
 
 
                 @Html.LabelFor(model => model.JobTypeId)
@@ -64,12 +61,13 @@
                         <option value="@jt.Id">@jt.Title</option>
                     }
                 </select>
-                <br />
+                <br /><br />
 
                 @Html.LabelFor(model => model.EnrollmentKey)
                 <br />
                 @Html.EditorFor(model => model.EnrollmentKey)
                 @Html.ValidationMessageFor(model => model.EnrollmentKey)
+                <br />
                 <span>برای افزودن همکاران باید کلیدی بیفزایید تا همکار با وارد کردن آن به شما ملحق شود</span>
                 <br/>
                 @*@Html.DisplayText("برای افزودن همکاران باید کلیدی بیفزایید تا همکار با وارد کردن آن به شما ملحق شود")*@
@@ -80,19 +78,13 @@
                 <br />
                 @Html.LabelFor(model => model.About)
                 <br />
-                @Html.EditorFor(m => m.About)
+                @Html.TextAreaFor(m => m.About)
                 <br />
                 <br />
-            </div>
 
-            <div class="col-xs-8 col-xs-offset-2">
-                <button class="btn btn-sm btn-primary btn-block" type="submit" value="Edit">ویرایش شغل</button>
-            </div>
-
-        </div>
-
+                <button class="btn btn-default-custom" type="submit" value="Edit">ویرایش شغل</button>
+                
     }
-</div>
 
 
 

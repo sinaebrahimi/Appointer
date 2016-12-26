@@ -289,6 +289,10 @@ namespace Appointer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            if (SessionPersister.UserRole.ToString() == "User" || SessionPersister.UserRole.ToString() == "JobCorp")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             JobCorp jc = db.JobCorps.Find(id);
             if (jc == null)
             {
