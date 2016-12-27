@@ -53,7 +53,7 @@
                             @Html.DisplayFor(modelItem => jc.RoleTitle)
                         </td>
                         <td>
-                            @Html.ActionLink("حذف همکار", "DeleteJobCorp", new { id = jc.Id })
+                            @Html.ActionLink("حذف همکار", "DeleteJobCorp", new { id = jc.Id }, new { @class="btn btn-danger"})
                         </td>
                     </tr>
                 }

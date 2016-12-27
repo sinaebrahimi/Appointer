@@ -30,17 +30,17 @@ namespace Appointer.Controllers
             //var services = db.Services.Where(acc => acc.JobCorpId == jc.Id);
             //return View(services.ToList());
             //}
-            if (SessionPersister.UserRole.ToString() == "Admin")
-            {
-                var jobs = db.Jobs.ToList();
-                return View(jobs);
-            }
             if (SessionPersister.UserRole.ToString() == "JobCorp" || SessionPersister.UserRole.ToString() == "JobOwner")
             {
 
-                return RedirectToAction("Index", "JCDashboard");
-            }
 
+
+                JobCorp jc = new JobCorp();
+                var u = Int32.Parse(Session["userId"].ToString());
+                jc = db.JobCorps.Where(acc => acc.UserId == u).FirstOrDefault();
+                var services = db.Services.Where(acc => acc.JobCorpId == jc.Id);
+                return View(services.ToList());
+            }
             else
             {
 

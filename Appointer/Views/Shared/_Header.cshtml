@@ -25,8 +25,9 @@
                 }
             </ul>
             @* to do search in Main/Jobs *@
-            <form class="navbar-form navbar-left">
-                <input type="text" class="form-control" placeholder="جستجو ...">
+            <form class="navbar-form navbar-left" action="~/Main/Jobs" method="post">
+                @Html.AntiForgeryToken()
+                <input type="text" class="form-control" name="title" placeholder="جستجو ...">
             </form>
         </div>
     </div>

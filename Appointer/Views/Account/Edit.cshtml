@@ -6,8 +6,7 @@
 }
 
 
-<div class="fullpage-form">
-    <div class="info">
+    <div class="info text-center">
         <div class="info-title"><strong>ویرایش کاربر</strong></div>
         <hr>
     </div>
@@ -29,13 +28,11 @@
                 @Html.ValidationMessageFor(model => model.Email)
 
                 <br />
-                <br />
                 @Html.LabelFor(model => model.Password)
                 <br />
                                 @Html.EditorFor(model => model.Password)
                                 <br />
                 @Html.ValidationMessageFor(model => model.Password)
-                <br />
                 <br />
                 @Html.LabelFor(model => model.Phone)
                 <br />
@@ -43,13 +40,11 @@
                                 <br />
                 @Html.ValidationMessageFor(model => model.Phone)
                 <br />
-                <br />
                 @Html.LabelFor(model => model.FullName)
                 <br />
                                 @Html.EditorFor(model => model.FullName)
                                 <br />
                 @Html.ValidationMessageFor(model => model.FullName)
-                <br />
                 <br />
                 @Html.LabelFor(model => model.About)
                 <br />
@@ -71,7 +66,7 @@
                 {
                         <option value="@cities.Id">@cities.Name</option>
                     }
-                </select><br /><br/>
+                </select><br />
 
 
 
@@ -89,7 +84,7 @@
 
                 @Html.DropDownListFor(model => model.UserRoleId, Enum.GetNames(typeof(Appointer.Models.UserRole_Persian)).Where(p => p != "مدیر").Select(e => new SelectListItem { Text = e, Value = (int)Enum.Parse(typeof(Appointer.Models.UserRole_Persian), e) + "" }))
                 <br />
-
+                <br />
                 <button class="btn btn-default-custom" type="submit" value="Edit">ویرایش</button>
             
     }

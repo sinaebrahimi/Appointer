@@ -58,7 +58,12 @@ h1 {
     font-weight: bold;
 }
 
-
+.clockpicker{
+    margin: 0 auto;
+}
+.select2 {
+    width:192px!important;
+}
 .navbar-nav > li > a {
     color: #fefefe;
 }

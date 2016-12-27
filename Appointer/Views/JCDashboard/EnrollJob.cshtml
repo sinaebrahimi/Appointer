@@ -40,12 +40,12 @@ $(document).ready(function () {
         //alert(response);
         if (response == false) {
 
-            $(".ajaxRes").html("<span style='color: red;'>شغلی با کد ارسالی شما یافت نشد</span>");
+            $(".ajaxRes").html("<br/><span style='color: red;'>شغلی با کد ارسالی شما یافت نشد</span>");
             
         }
         else
         {
-            $(".ajaxRes").html(response.Title + "<hr><span style='color: blue;'>صاحب کار:</span><br/>" + response.JobOwner + "<hr><span style='color: blue;'>شماره تماس:</span><br/>" + response.JobPhone + "<hr><span style='color: blue;'>آدرس:</span><br/>" + response.City+"<br/>"+response.Address);
+            $(".ajaxRes").html("<br/>"+response.Title + "<hr><span style='color: blue;'>صاحب کار:</span><br/>" + response.JobOwner + "<hr><span style='color: blue;'>شماره تماس:</span><br/>" + response.JobPhone + "<hr><span style='color: blue;'>آدرس:</span><br/>" + response.City+"<br/>"+response.Address);
 
 
         }

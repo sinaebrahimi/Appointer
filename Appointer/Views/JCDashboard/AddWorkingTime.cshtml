@@ -159,8 +159,8 @@
             var count_att = 0;
             $("#Add_att").click(function () {
                 i++;
-                var x = $('<div class="input-group clockpicker text-center"><span>از:&nbsp;</span><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span><input type="text" id="Range_' + i + '__StartHour" name="Range[' + i + '].StartHour" class="form-control" value="08:30"></div></div><br/>');
-                var y = $('<div class="input-group clockpicker text-center"><span>تا:&nbsp;</span><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span><input type="text" id="Range_' + i + '__EndHour" name="Range[' + i + '].EndHour" class="form-control" value="16:30"></div></div>');
+                var x = $('<div class="input-group clockpicker text-center"><span>از:&nbsp;</span><input type="text" id="Range_' + i + '__StartHour" name="Range[' + i + '].StartHour" value="08:30"></div></div><br/>');
+                var y = $('<div class="input-group clockpicker text-center"><span>تا:&nbsp;</span><input type="text" id="Range_' + i + '__EndHour" name="Range[' + i + '].EndHour" value="16:30"></div></div>');
 
                 $(".editor-field.att-wrapper").append('<br/>مدت زمان کاری ' + ++count_att + '<br/>').append(x).append(y);
 

@@ -11,14 +11,15 @@
     @using (Html.BeginForm("Index", "Main", FormMethod.Post, new { @class = "form-vertical text-right" }))
     {
         @Html.AntiForgeryToken()
+        <div class="col-lg-3"></div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <div class="col-lg-10">
                     <button class="btn btn-default-custom" name="submit" type="submit">جستجو</button>
                 </div>
 
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
 
                 <div class="col-lg-10">
                     <span class="fa fa-flag" aria-hidden="true"></span>
@@ -36,7 +37,7 @@
 
 
 
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <div class="col-lg-10">
                     <span class="fa fa-map-marker" aria-hidden="true"></span>
 
@@ -54,11 +55,11 @@
 
             <div class="col-lg-3">
                 <div class="col-lg-10">
-                    
+
 
                     <span class="fa fa-briefcase" aria-hidden="true">
-                    <input type="text" name="title" id="title" placeholder="نام شغل" />
                     </span>
+                    <input type="text" name="title" id="title" placeholder="نام شغل" />
                 </div>
 
             </div>
@@ -69,55 +70,55 @@
 
 
     }
-<hr />
-<br />
+    <hr />
+    <br />
 
 
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th class="text-right">
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th class="text-right">
-                    @Html.DisplayNameFor(model => model.User.FullName)
-                </th>
-                <th class="text-right">
-                    @Html.DisplayNameFor(model => model.JobPhone)
-                </th>
-                <th class="text-right">
-                    @Html.DisplayNameFor(model => model.City.Name)
-                </th>
-                <th class="text-right">
-                    @Html.DisplayNameFor(model => model.JobType.Title)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-right">
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th class="text-right">
+                        @Html.DisplayNameFor(model => model.User.FullName)
+                    </th>
+                    <th class="text-right">
+                        @Html.DisplayNameFor(model => model.JobPhone)
+                    </th>
+                    <th class="text-right">
+                        @Html.DisplayNameFor(model => model.City.Name)
+                    </th>
+                    <th class="text-right">
+                        @Html.DisplayNameFor(model => model.JobType.Title)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink(item.Title, "JobCorpsList", new { id = item.Id })
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.JobPhone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City.Name)
-                </td>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Title, "JobCorpsList", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City.Name)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.JobType.Title)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobType.Title)
+                    </td>
 
-            </tr>
-        }
+                </tr>
+            }
 
-    </table>
-</div>
+        </table>
+    </div>

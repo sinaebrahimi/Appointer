@@ -23,8 +23,16 @@ namespace Appointer.Controllers
         public ActionResult Index()
         {
             //should just be available for admin
-            var jobs = db.Jobs.Include(j => j.User).Include(j => j.JobType);
-            return View(jobs.ToList());
+            if (SessionPersister.UserRole.ToString() == "Admin")
+            {
+                var jobs = db.Jobs.Include(j => j.User).Include(j => j.JobType);
+                return View(jobs.ToList());
+            }
+            else
+            {
+
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: Jobs/Details/5
@@ -276,8 +284,15 @@ namespace Appointer.Controllers
         {
             JobCorp jc = db.JobCorps.Find(id);
             jc.User.UserRoleId = 1;
+            try
+            {
             db.JobCorps.Remove(jc);
             db.SaveChanges();
+
+            }catch(System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+                return Content("سیستم موفق نشد");
+            }
             return RedirectToAction("Index","JCDashboard");
         }
 
