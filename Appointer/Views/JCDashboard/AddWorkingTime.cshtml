@@ -99,12 +99,47 @@
 
     @Html.ActionLink("حذف زمان‌های کاری", "ModifyWorkingDate")
 </p>
+@functions{
+    public string pdate(DayOfWeek day)
+    {
+        switch (day)
+        {
+            case DayOfWeek.Sunday:
+                return "یکشنبه";
+
+
+            case DayOfWeek.Monday:
+                return "دوشنبه";
+
+            case DayOfWeek.Tuesday:
+                return "سه‌شنبه";
+
+            case DayOfWeek.Wednesday:
+                return "چهارشنبه";
+
+            case DayOfWeek.Thursday:
+                return "پنج‌شنبه";
+
+            case DayOfWeek.Friday:
+                return "جمعه";
+
+            case DayOfWeek.Saturday:
+                return "شنبه";
+
+            default:
+                return "روز هفته";
+        }
+    }
+}
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
                 <th class="text-right">
                     @Html.DisplayName("تاریخ")
+                </th>
+                <th class="text-right">
+                    @Html.DisplayName(" روز")
                 </th>
                 <th class="text-right">
                     @Html.DisplayName(" شروع")
@@ -120,6 +155,9 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => wt.StartTime)
+                    </td>
+                    <td>
+                        <span>@pdate(wt.StartTime.DayOfWeek)</span>
                     </td>
                     @{string StartHHmm = wt.StartTime.ToString("HH:mm");  }
 

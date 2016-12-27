@@ -17,13 +17,18 @@
 
     @Html.ValidationSummary()
     @Html.LabelFor(model => model.myDate)
+    <span class="fa fa-calendar"></span>
     <br />
         @Html.EditorFor(model => model.myDate)
         <br />
         @Html.ValidationMessageFor(model => model.myDate)
 
+    <br/>
         <div class="input-group clockpicker">
 
+            <label for="Clock"> زمان </label>
+            <span class="fa fa-clock-o"></span><br />
+            <label for="From"> از:</label>
             @Html.EditorFor(model => model.start, new
                {
                    @class = "form-control",
@@ -35,6 +40,7 @@
 
                 <div class="input-group clockpicker">
 
+                    <label for="To"> تا: </label>
                     @Html.EditorFor(model => model.end, new
              {
                  @class = "form-control",
@@ -51,6 +57,38 @@
 
     @Html.ActionLink("حذف زمان‌های کاری", "ModifyWorkingDate")
 </p>
+@functions{
+    public string pdate(DayOfWeek day)
+    {
+        switch (day)
+        {
+            case DayOfWeek.Sunday:
+                return "یکشنبه";
+
+
+            case DayOfWeek.Monday:
+                return "دوشنبه";
+
+            case DayOfWeek.Tuesday:
+                return "سه‌شنبه";
+
+            case DayOfWeek.Wednesday:
+                return "چهارشنبه";
+
+            case DayOfWeek.Thursday:
+                return "پنج‌شنبه";
+
+            case DayOfWeek.Friday:
+                return "جمعه";
+
+            case DayOfWeek.Saturday:
+                return "شنبه";
+
+            default:
+                return "روز هفته";
+        }
+    }
+}
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -59,14 +97,15 @@
                     @Html.DisplayName("تاریخ")
                 </th>
                 <th class="text-right">
+                    @Html.DisplayName("روز")
+                </th>
+                <th class="text-right">
                     @Html.DisplayName(" شروع")
                 </th>
                 <th class="text-right">
                     @Html.DisplayName(" پایان")
                 </th>
-                <th class="text-right">
-                    @Html.DisplayName("روز")
-                </th>
+
             </tr>
         </thead>
 
@@ -75,6 +114,9 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => wt.StartTime)
+                    </td>
+                    <td>
+                        <span>@pdate(wt.StartTime.DayOfWeek)</span>
                     </td>
                     @{string StartHHmm = wt.StartTime.ToString("HH:mm");  }
 
@@ -88,16 +130,6 @@
                     </td>
 
 
-                    <td>
-
-                        @*@Html.DisplayFor(modelItem => Model.StartTime, Enum.GetNames(typeof(Appointer.Models.DaysOfWeek_Persian)).Select(e => new SelectListItem { Text = e, Value = (int)Enum.Parse(typeof(Appointer.Models.DaysOfWeek_Persian), e) + "" }))*@
-
-                        @Html.DisplayFor(modelItem => wt.StartTime.DayOfWeek, Enum.GetNames(typeof(Appointer.Models.DaysOfWeek_Persian)))
-
-
-
-
-                    </td>
                 </tr>
                         }
     </table>

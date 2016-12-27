@@ -5,25 +5,24 @@
 
     Layout = "~/Views/shared/_layout.cshtml";
 }
-<hr />
 <br />
 <h2>جستجوی مشاغل</h2>
 <hr />
-<div class="form">
-    @using (Html.BeginForm("Index", "Main", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        <div class="row">
+@using (Html.BeginForm("Index", "Main", FormMethod.Post, new { @class = "form-vertical text-right" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-lg-3"></div>
 
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="col-lg-10">
-                    <button class="btn btn-default-custom" name="submit" type="submit">جستجو</button>
-                </div>
-
+        <div class="col-lg-2">
+            <div class="col-lg-10">
+                <button class="btn btn-default-custom" name="submit" type="submit">جستجو</button>
             </div>
-            <div class="col-lg-3">
+
+        </div>
+            <div class="col-lg-2">
 
                 <div class="col-lg-10">
+                    <span class="fa fa-flag" aria-hidden="true"></span>
 
                     <select name="jobtype" id="jobtype">
                         <option style="color:red" value="">نوع شغل</option>
@@ -34,13 +33,14 @@
                     </select>
 
                 </div>
-                @*<label class="col-md-2">نوع‌شغل</label>*@
             </div>
 
 
 
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <div class="col-lg-10">
+                    <span class="fa fa-map-marker" aria-hidden="true"></span>
+
                     <select name="city" id="city">
                         <option class="text-success" value="">شهر</option>
                         @foreach (Appointer.Models.City cities in ViewBag.cities)
@@ -51,25 +51,25 @@
 
                 </div>
 
-                @*<label class="col-md-2">شهر</label>*@
             </div>
 
             <div class="col-lg-3">
                 <div class="col-lg-10">
+
+
+                    <span class="fa fa-briefcase" aria-hidden="true">
+                    </span>
                     <input type="text" name="title" id="title" placeholder="نام شغل" />
                 </div>
 
-                @*<label class="col-md-2">نام‌شغل</label>*@
             </div>
 
 
 
 
-        </div>
 
 
-    }
-</div>
+}
 <hr />
 <br />
 
@@ -98,7 +98,7 @@
         </thead>
 
         @foreach (var item in Model)
-        {
+            {
             <tr>
                 <td>
                     @Html.ActionLink(item.Title, "JobCorpsList", new { id = item.Id })

@@ -21,6 +21,9 @@
                     @Html.DisplayNameFor(model => model.StartTime)
                 </th>
                 <th class="text-right">
+                    @Html.DisplayName("روز")
+                </th>
+                <th class="text-right">
                     @Html.DisplayName("شروع")
                 </th>
                 <th class="text-right">
@@ -41,7 +44,38 @@
                 <th></th>
             </tr>
         </thead>
+        @functions{
+            public string pdate(DayOfWeek day)
+            {
+                switch (day)
+                {
+                    case DayOfWeek.Sunday:
+                        return "یکشنبه";
 
+
+                    case DayOfWeek.Monday:
+                        return "دوشنبه";
+
+                    case DayOfWeek.Tuesday:
+                        return "سه‌شنبه";
+
+                    case DayOfWeek.Wednesday:
+                        return "چهارشنبه";
+
+                    case DayOfWeek.Thursday:
+                        return "پنج‌شنبه";
+
+                    case DayOfWeek.Friday:
+                        return "جمعه";
+
+                    case DayOfWeek.Saturday:
+                        return "شنبه";
+
+                    default:
+                        return "روز هفته";
+                }
+            }
+        }
         @foreach (var item in Model)
         {
             <tr>
@@ -50,6 +84,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    <span>@pdate(item.StartTime.DayOfWeek)</span>
                 </td>
                 @{string StartHHmm = item.StartTime.ToString("HH:mm");  }
 
