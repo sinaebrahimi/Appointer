@@ -82,7 +82,19 @@
                     @Html.DisplayFor(modelItem => item.Service.JobCorp.User.FullName)
                 </td>
                 <td>
-                    @Html.ActionLink("جزئیات", "ReserveDetails", new { id = item.Id })
+                    @if (item.isReserved == false)
+                    {
+
+                        <button class="btn btn-danger" type="button" value="Cancelled">کنسل شد</button> <span> |</span>
+                        @Html.ActionLink("جزئیات", "ReserveDetails", new { id = item.Id })
+
+                    }
+                    else
+                    {
+
+
+                        @Html.ActionLink("جزئیات", "ReserveDetails", new { id = item.Id })
+                    }
                 </td>
             </tr>
                     }

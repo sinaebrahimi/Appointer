@@ -12,6 +12,18 @@
     <dl class="main-container">
 
         <dt>
+           
+            @if (Model.isReserved == false)
+            {
+
+                <button class="btn btn-danger" type="button" value="Cancelled">کنسل شده</button>
+                <br/>
+            }
+
+
+        </dt>
+        
+        <dt>
             @Html.DisplayNameFor(model => model.BookDate)
         </dt>
 
@@ -99,7 +111,17 @@
 
 
 <p>
-    @Html.ActionLink("کنسل", "ReserveCancellation", new { id = Model.Id }) |
-    @Html.ActionLink("ویرایش", "ReserveEdit", new { id = Model.Id }) |
+    @if (Model.isReserved == true)
+    {
+        if (Model.StartTime >= DateTime.Now)
+        {
+        @Html.ActionLink("کنسل", "ReserveCancellation", new { id = Model.Id })
+        <span> |</span>
+        @Html.ActionLink("ویرایش", "ReserveEdit", new { id = Model.Id })
+        <span> |</span>
+        }
+    }
+
+
     @Html.ActionLink("بازگشت به قرارها", "Reservations")
 </p>

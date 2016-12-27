@@ -8,15 +8,13 @@
 <br />
 <h2>جستجوی مشاغل</h2>
 <hr />
-<div class="form">
-    @using (Html.BeginForm("Index", "Main", FormMethod.Post))
+    @using (Html.BeginForm("Index", "Main", FormMethod.Post, new { @class = "form-vertical text-right" }))
     {
         @Html.AntiForgeryToken()
-        <div class="row">
 
             <div class="col-lg-3">
                 <div class="col-lg-10">
-                    <button class="btn-success btn btn-hover" name="submit" type="submit">جستجو</button>
+                    <button class="btn btn-default-custom" name="submit" type="submit">جستجو</button>
                 </div>
 
             </div>
@@ -68,11 +66,9 @@
 
 
 
-        </div>
 
 
     }
-</div>
 <hr />
 <br />
 

@@ -5,89 +5,105 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<hr />
-<h3>لیست قرارهای کاری امروز و فردا</h3>
 
-<hr />
-
+<br />
+<h3>لیست قرارهای کاری امروز و فردا</h3><hr />
+<br />
 @ViewBag.Error
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BookDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartTime)
-        </th>
-        <th>
-            @Html.DisplayName("شروع")
-        </th>
-        <th>
-            @Html.DisplayName("پایان")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Service.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Service.Duration)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Phone)
-        </th>
-        <th></th>
-    </tr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.BookDate)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.StartTime)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayName("شروع")
+                </th>
+                <th class="text-right">
+                    @Html.DisplayName("پایان")
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.Service.Title)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.Service.Duration)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.User.FullName)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.User.Phone)
+                </th>
+                <th></th>
+            </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            @{string StartHHmm = item.StartTime.ToString("HH:mm");  }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    @{string StartHHmm = item.StartTime.ToString("HH:mm");  }
 
-            <td>
-                @Html.DisplayFor(modelItem => StartHHmm)
-            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => StartHHmm)
+                    </td>
 
-            @{string EndHHmm = item.EndTime.ToString("HH:mm");  }
-            <td>
-                @Html.DisplayFor(modelItem => EndHHmm)
-            </td>
+                    @{string EndHHmm = item.EndTime.ToString("HH:mm");  }
+                    <td>
+                        @Html.DisplayFor(modelItem => EndHHmm)
+                    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Service.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Service.Duration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Phone)
-            </td>
-            <td>
-                @Html.ActionLink("جزئیات", "AppointmentDetails", new { id = item.Id })
-            </td>
-        </tr>
-   }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Service.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Service.Duration)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Phone)
+                    </td>
+                    <td>
+                        @if (item.isReserved == false)
+                        {
 
-</table>
+                            <button class="btn btn-danger" type="button" value="Cancelled">کنسل شد</button> <span> |</span>
+                            @Html.ActionLink("جزئیات", "AppointmentDetails", new { id = item.Id })
 
-<hr />
-<h4>@Html.ActionLink("قرارهای آتی", "AppointmentList")</h4>
-<br/>
-<h4>@Html.ActionLink("قرارهای قدیمی", "ExpiredAppointmentList")</h4>
+                        }
+                        else
+                        {
+
+                            @Html.ActionLink("جزئیات", "AppointmentDetails", new { id = item.Id })  <span> |</span>
+                            @Html.ActionLink("کنسل", "AppointmentCancellation", new { id = item.Id })
+                        }
 
 
-<hr />
-<br />
-<h6>برای داشتن مشتری ها نیاز به تبلیغ بیشتر دارید</h6>
-<br />
-<h6>سایت ما و اسم شغل خود را به مشتری ها بگویید تا بتوانند به راحتی از طریق سایت از شما وقت بگیرند</h6>
+
+                </td>
+                </tr>
+                        }
+
+    </table>
+    </div>
+    <hr />
+    <h4>@Html.ActionLink("قرارهای آتی", "AppointmentList")</h4>
+    <br />
+    <h4>@Html.ActionLink("قرارهای قدیمی", "ExpiredAppointmentList")</h4>
+
+
+    <hr />
+    <br />
+    <h6>برای داشتن مشتری ها نیاز به تبلیغ بیشتر دارید</h6>
+    <br />
+    <h6>سایت ما و اسم شغل خود را به مشتری ها بگویید تا بتوانند به راحتی از طریق سایت از شما وقت بگیرند</h6>

@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<Appointer.Models.WorkingTime>
 
 @{
-    ViewBag.Title = "تغییر روزهای کاری";
+    ViewBag.Title = "حذف زمان‌های کاری";
     Layout = "~/Views/shared/_layout.cshtml";
 }
 
-<div class="info">
-    <div class="info-title"><h2 class="text-center">تغییر روزهای کاری</h2></div>
+<div class="info text-center">
+    <div class="info-title"><h2>حذف زمان‌های کاری</h2></div>
 </div>
 
 <hr />
@@ -17,16 +17,16 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>
+                        <th class="text-right">
                             @Html.DisplayName("تاریخ")
                         </th>
-                        <th>
+                        <th class="text-right">
                             @Html.DisplayName(" روز")
                         </th>
-                        <th>
+                        <th class="text-right">
                             @Html.DisplayName(" شروع")
                         </th>
-                        <th>
+                        <th class="text-right">
                             @Html.DisplayName(" پایان")
                         </th>
 

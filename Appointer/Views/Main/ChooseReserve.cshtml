@@ -1,7 +1,7 @@
 ﻿@model Appointer.Models.Appointment
 
 @{
-    //ViewBag.Title = "رزرو وقت";
+    ViewBag.Title = "رزرو وقت";
     //string StartHHmm = item.StartTime.ToString("HH:mm");
     //ViewBag.Title = Model.Service.JobCorp.User.FullName;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,6 +20,8 @@
     {
         @Html.AntiForgeryToken()
                 @Html.LabelFor(model => model.myDate)
+
+        <span class="fa fa-calendar"></span>
                 <br />
                 <select name="selDate" id="selDate">  @*onchange = "javascript:Function();"*@
 
@@ -37,16 +39,14 @@
 
                 <div class="input-group clockpicker">
 
-                    <label for="Password"> زمان </label><br />
+                    <label for="Clock"> زمان </label>
+                    <span class="fa fa-clock-o"></span><br />
 
                         @Html.EditorFor(model => model.start, new
-               {
-                   @class = "form-control",
-                   value = "09:30"
-               })
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-time"></span>
-                    </span>
+                   {
+                       value = "09:30"
+                   })
+
                     
 
                 </div>

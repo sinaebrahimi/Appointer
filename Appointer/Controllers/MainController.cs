@@ -476,7 +476,7 @@ namespace Appointer.Controllers
             }
 
             //ViewBag.WTChoose = db.WorkingTimes.Where(acc => (acc.JobCorpId == id) && (acc.StartTime > DateTime.Now)).ToList();
-            ViewBag.WorkingTimes = db.WorkingTimes.Where(acc => (acc.JobCorpId == id) && (acc.StartTime > DateTime.Now)).ToList();
+            ViewBag.WorkingTimes = db.WorkingTimes.Where(acc => (acc.JobCorpId == id) && (acc.StartTime > DateTime.Now)).OrderBy(acc => acc.StartTime).ToList();
             ViewBag.Services = db.Services.Where(acc => acc.JobCorpId == id).ToList();
             return View();
         }

@@ -79,8 +79,21 @@
                     @Html.DisplayFor(modelItem => item.User.Phone)
                 </td>
                 <td>
-                    @Html.ActionLink("جزئیات", "AppointmentDetails", new { id = item.Id }) |
-                    @Html.ActionLink("کنسل", "AppointmentCancellation", new { id = item.Id })
+                    @if (item.isReserved == false)
+                    {
+
+                        <button class="btn btn-danger" type="button" value="Cancelled">کنسل شد</button> <span> |</span>
+                        @Html.ActionLink("جزئیات", "AppointmentDetails", new { id = item.Id })
+
+                    }
+                    else
+                    {
+
+                        @Html.ActionLink("جزئیات", "AppointmentDetails", new { id = item.Id })  <span> |</span>
+                        @Html.ActionLink("کنسل", "AppointmentCancellation", new { id = item.Id })
+                    }
+
+
                 </td>
             </tr>
                     }
