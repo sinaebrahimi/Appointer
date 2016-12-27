@@ -286,12 +286,36 @@ namespace Appointer.Controllers
             jc.User.UserRoleId = 1;
             try
             {
-            db.JobCorps.Remove(jc);
-            db.SaveChanges();
+                var jcHasAppointments = db.Appointments.Any(a => a.Service.JobCorpId == jc.Id && a.StartTime >= DateTime.Now);
+
+                var listOfServices = new List<Service>();
+                listOfServices = db.Services.Where(a => a.JobCorpId == jc.Id).ToList();
+
+                var listOfWT = new List<WorkingTime>();
+                listOfWT = db.WorkingTimes.Where(a => a.JobCorpId == jc.Id).ToList();
+
+                var listOfAp = new List<Appointment>();
+                listOfAp = db.Appointments.Where(a => a.Service.JobCorpId == jc.Id).ToList();
+                if (!jcHasAppointments)
+                {
+                    db.Services.RemoveRange(listOfServices);
+
+                    db.WorkingTimes.RemoveRange(listOfWT);
+
+                    db.Appointments.RemoveRange(listOfAp);
+                    db.JobCorps.Remove(jc);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.Error = "به علت رزرو وقت مشتریان با این همکار، این عملیات قابل انجام نیست";
+                    return RedirectToAction("DeleteJobCorp", "Jobs");
+                }
+                    
 
             }catch(System.Data.Entity.Infrastructure.DbUpdateException e)
             {
-                return Content("سیستم موفق نشد");
+                return Content("سیستم موفق به حذف همکار مورد نظر نشد");
             }
             return RedirectToAction("Index","JCDashboard");
         }

@@ -143,12 +143,28 @@ namespace Appointer.Controllers
             Service service = db.Services.Find(id);
             try
             {
-                db.Services.Remove(service);
-                db.SaveChanges();
+                var serviceHasAppointments = db.Appointments.Any(a => a.ServiceId == service.Id && a.StartTime >= DateTime.Now);
+                if (!serviceHasAppointments)
+                {
+
+                    var listOfAp = new List<Appointment>();
+
+                    listOfAp = db.Appointments.Where(a => a.ServiceId == service.Id).ToList();
+                    db.Appointments.RemoveRange(listOfAp);
+                    
+                    db.Services.Remove(service);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.Error = "به علت رزرو وقت مشتریان با این همکار، این عملیات قابل انجام نیست";
+                    return RedirectToAction("Delete");
+                }
+            
             }
-            catch (InvalidOperationException)
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
             {
-                ViewBag.Error = "به علت رزرو شدن این سرویس توسط کاربران نمی‌توانید آن را حذف کنید";
+                return Content("سیستم موفق به حذف سرویس مورد نظر نشد");
             }
             return RedirectToAction("Index");
         }
