@@ -1,488 +1,482 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using Appointer.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Appointer.Models;
-using System.Data.Entity;
-using Appointer.Security;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Appointer.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
 
-        private AppointerEntities db = new AppointerEntities();
-        private AccountModel um = new AccountModel();
-
-        //[CustomAuthorize(Roles = "jc,ad,u")]//jobCorp and admin
-        public ActionResult Index()
+        public AccountController()
         {
-            if (Session["userRole"] != null)
+        }
+
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
             {
-                if (SessionPersister.UserRole.ToString() == "Admin")
-                {
-                    return View(db.Users.ToList());
-                }
-                else if (SessionPersister.UserRole.ToString() == "User")
-                {
-                    return RedirectToAction("Jobs", "Main");
-                }
-                else if (SessionPersister.UserRole.ToString() == "JobCorp" || SessionPersister.UserRole.ToString() == "JobOwner")
-                {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
 
-                    return RedirectToAction("Index", "JCDashboard");
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
-                    //show jobcorp's panel
-                }
-                else
+        //
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+            }
+        }
+
+        //
+        // GET: /Account/VerifyCode
+        [AllowAnonymous]
+        public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
+        {
+            // Require that the user has already logged in via username/password or external login
+            if (!await SignInManager.HasBeenVerifiedAsync())
+            {
+                return View("Error");
+            }
+            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
+        }
+
+        //
+        // POST: /Account/VerifyCode
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // The following code protects for brute force attacks against the two factor codes. 
+            // If a user enters incorrect codes for a specified amount of time then the user account 
+            // will be locked out for a specified amount of time. 
+            // You can configure the account lockout settings in IdentityConfig
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(model.ReturnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid code.");
+                    return View(model);
+            }
+        }
+
+        //
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
                 {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
                     return RedirectToAction("Index", "Home");
                 }
+                AddErrors(result);
             }
-            
-            User user = um.findById(SessionPersister.UserId);
-            return View(user);
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
-        [HttpGet]
-        public ActionResult SignUp()
+        //
+        // GET: /Account/ConfirmEmail
+        [AllowAnonymous]
+        public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (SessionPersister.UserId < 0)
+            if (userId == null || code == null)
             {
-                ViewBag.cities = um.GetCityList();
-                
-                return View();
+                return View("Error");
             }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-
+            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
+        //
+        // GET: /Account/ForgotPassword
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ForgotPassword
         [HttpPost]
-        public ActionResult SignUp(User user)
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-
-
-
-            if (string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Password) || um.signup(user) == null)
+            if (ModelState.IsValid)
             {
-                ViewBag.Error = "Signup was not successful";
-                return View();
-            }
-            SessionPersister.UserId = user.Id;
-            SessionPersister.Email = user.Email;
-            SessionPersister.FullName = user.FullName;
-            var ur = user.RoleName;
-            SessionPersister.UserRole = ur;
+                var user = await UserManager.FindByNameAsync(model.Email);
+                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                {
+                    // Don't reveal that the user does not exist or is not confirmed
+                    return View("ForgotPasswordConfirmation");
+                }
 
+                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+            }
 
-            if(ur == "JobOwner")
-            {
-                return RedirectToAction("Create", "Jobs", new { JobOwnerId = user.Id });
-            }
-            else if (ur == "JobCorp")
-            {
-                return RedirectToAction("EnrollJob", "JCDashboard");
-            }
-            else
-            {
-                return RedirectToAction("Jobs", "Main");
-            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
-        [HttpGet]
-        public ActionResult SignIn()
+        //
+        // GET: /Account/ForgotPasswordConfirmation
+        [AllowAnonymous]
+        public ActionResult ForgotPasswordConfirmation()
         {
-            if (SessionPersister.UserId < 0)
-            {
-
-                return View();
-            }
-            else
-            {
-
-                if (SessionPersister.UserRole.ToString() == "Admin")
-                {
-
-                    return RedirectToAction("Index", "Admin");
-                }
-                else if (SessionPersister.UserRole.ToString() == "JobCorp" || SessionPersister.UserRole.ToString() == "JobOwner")
-                {
-
-                    DateTime dt = DateTime.Now.AddDays(2);
-
-                    var hasAppointmentsToday = db.Appointments.Any(a => a.Service.JobCorp.UserId == SessionPersister.UserId && a.StartTime >= DateTime.Now && a.StartTime <= dt);
-
-                    var hasAppointments = db.Appointments.Any(p => p.Service.JobCorp.UserId == SessionPersister.UserId);
-                    var hasServices = db.Services.Any(p => p.JobCorp.UserId == SessionPersister.UserId);
-                    var hasWorkingTimes = db.WorkingTimes.Any(p => p.JobCorp.UserId == SessionPersister.UserId);
-                    if (!hasServices)
-                    {
-                        return RedirectToAction("Create", "Services");
-                    }
-                    if (!hasWorkingTimes)
-                    {
-                        return RedirectToAction("AddWorkingTime", "JCDashboard");
-                    }
-                    if (hasAppointments)
-                    {
-                        if (hasAppointmentsToday)
-                        {
-                            return RedirectToAction("AppointmentList", "JCDashboard");
-                        }
-                        return RedirectToAction("FutureAppointmentList", "JCDashboard");
-                    }
-                    return RedirectToAction("Index", "JCDashboard");
-                }
-                else//user
-                {
-                    DateTime dt = DateTime.Now.AddDays(2);
-
-                    var hasReservationsToday = db.Appointments.Any(p => p.UserId == SessionPersister.UserId && p.StartTime >= DateTime.Now && p.StartTime <= dt);
-
-                    var hasReservations = db.Appointments.Any(p => p.UserId == SessionPersister.UserId);//
-                    if (hasReservations)
-                    {
-                        if (hasReservationsToday)
-                        {
-                            return RedirectToAction("Reservations", "Main");
-                        }
-                        return RedirectToAction("FutureReservations", "Main");
-                    }
-                    return RedirectToAction("Jobs", "Main");
-                }
-
-            }
+            return View();
         }
 
+        //
+        // GET: /Account/ResetPassword
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string code)
+        {
+            return code == null ? View("Error") : View();
+        }
 
-
+        //
+        // POST: /Account/ResetPassword
         [HttpPost]
-        public ActionResult SignIn(User user)
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
-           
-            user = um.signIn(user.Email, user.Email, user.Password);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await UserManager.FindByNameAsync(model.Email);
             if (user == null)
             {
-                ViewBag.Error = "ایمیل یا رمز عبور درست وارد کنید";
+                // Don't reveal that the user does not exist
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+            AddErrors(result);
+            return View();
+        }
+
+        //
+        // GET: /Account/ResetPasswordConfirmation
+        [AllowAnonymous]
+        public ActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ExternalLogin
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            // Request a redirect to the external login provider
+            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+        }
+
+        //
+        // GET: /Account/SendCode
+        [AllowAnonymous]
+        public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
+        {
+            var userId = await SignInManager.GetVerifiedUserIdAsync();
+            if (userId == null)
+            {
+                return View("Error");
+            }
+            var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
+            var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
+            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
+        }
+
+        //
+        // POST: /Account/SendCode
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SendCode(SendCodeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
                 return View();
             }
 
-            SessionPersister.UserId = user.Id;
-            SessionPersister.Email = user.Email;
-
-            SessionPersister.FullName = user.FullName;
-            SessionPersister.UserRole = user.UserRole.Name;
-
-
-            if (SessionPersister.UserRole.ToString() == "Admin")
+            // Generate the token and send it
+            if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
             {
-
-                return RedirectToAction("Index", "Admin");
+                return View("Error");
             }
-            else if (SessionPersister.UserRole.ToString() == "JobCorp" || SessionPersister.UserRole.ToString()  == "JobOwner")
-            {
-                DateTime dt = DateTime.Now.AddDays(2);
-
-                var hasAppointmentsToday = db.Appointments.Any(a => a.Service.JobCorp.UserId == SessionPersister.UserId && a.StartTime >= DateTime.Now && a.StartTime <= dt);
-
-                var hasAppointments = db.Appointments.Any(p => p.Service.JobCorp.UserId == SessionPersister.UserId);
-                var hasServices = db.Services.Any(p => p.JobCorp.UserId == SessionPersister.UserId);
-                var hasWorkingTimes = db.WorkingTimes.Any(p => p.JobCorp.UserId == SessionPersister.UserId);
-                if (!hasServices)
-                {
-                    return RedirectToAction("Create", "Services");
-                }
-                if (!hasWorkingTimes)
-                {
-                    return RedirectToAction("AddWorkingTime", "JCDashboard");
-                }
-                if (hasAppointments)
-                {
-                    if (hasAppointmentsToday)
-                    {
-                        return RedirectToAction("AppointmentList", "JCDashboard");
-                    }
-                    return RedirectToAction("FutureAppointmentList", "JCDashboard");
-                }
-                return RedirectToAction("Index", "JCDashboard");
-            }
-            else//user
-            {
-
-                DateTime dt = DateTime.Now.AddDays(2);
-
-                var hasReservationsToday = db.Appointments.Any(p => p.UserId == SessionPersister.UserId && p.StartTime >= DateTime.Now && p.StartTime <= dt);
-                var hasReservations = db.Appointments.Any(p => p.UserId == SessionPersister.UserId);//
-                if (hasReservations)
-                {
-                    if (hasReservationsToday)
-                    {
-                        return RedirectToAction("Reservations", "Main");
-                    }
-                    return RedirectToAction("FutureReservations", "Main");
-                }
-                return RedirectToAction("Jobs", "Main");
-            }
-
-
+            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
-        //[CustomAuthorize(Roles = "Dev,SuperAdmin,Admin,User")]
-        public ActionResult SignOut()
+        //
+        // GET: /Account/ExternalLoginCallback
+        [AllowAnonymous]
+        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-            SessionPersister.UserId = -1;
-            SessionPersister.Email = null;
-            SessionPersister.FullName = null;
-            SessionPersister.UserRole = null;
-
-            ViewBag.Message = "You've Signed out successfully";
-
-            return RedirectToAction("SignIn", "Account");
-        }
-
-        [HttpGet]
-        //[CustomAuthorize(Roles = "Dev,SuperAdmin,Admin,User")]
-        public ActionResult Edit()
-        {
-            User user = um.findById(SessionPersister.UserId);
-            ViewBag.cities = um.GetCityList();
-
-            if (user == null)
+            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+            if (loginInfo == null)
             {
-                ViewBag.Error = "user Not Found";
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
 
-            return View(user);
+            // Sign in the user with this external login provider if the user already has a login
+            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
+                case SignInStatus.Failure:
+                default:
+                    // If the user does not have an account, then prompt the user to create an account
+                    ViewBag.ReturnUrl = returnUrl;
+                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+            }
         }
 
-        // POST: /User/Edit/5
+        //
+        // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
-        //[CustomAuthorize(Roles = "Dev,SuperAdmin,Admin,User")]
-        public ActionResult Edit(User user)
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
-
-            um.EditUser(user);
-            SessionPersister.Email = user.Email;
-            SessionPersister.FullName = user.FullName;
-            var ur = user.RoleName;
-            //SessionPersister.UserRole = ur;
-
-
-            ////else if (ur == "JobCorp")
-            ////{
-            ////    return RedirectToAction("EnrollJob", "JCDashboard");
-            ////}
-            ////else
-            ////{
-            ////    return RedirectToAction("Index", "Main");
-            ////}
-            if (SessionPersister.UserRole.ToString() == "User")
+            if (User.Identity.IsAuthenticated)
             {
-                if (ur == "JobCorp")
-                {
-                    SessionPersister.UserRole = ur;
-                    return RedirectToAction("EnrollJob", "JCDashboard");
-                }
-                else if (ur == "JobOwner")
-                {
-                    SessionPersister.UserRole = ur;
-                    return RedirectToAction("Create", "Jobs", new { JobOwnerId = user.Id });
-                }
-                else//user
-                {
-                    var hasReservations = db.Appointments.Any(p => p.UserId == SessionPersister.UserId);//
-                    if (hasReservations)
-                    {
-                        return RedirectToAction("Reservations", "Main");
-                    }
-                    return RedirectToAction("Jobs", "Main");
-                }
-            }
-            else if (SessionPersister.UserRole.ToString() == "JobOwner")
-            {
-                if (ur == "JobCorp")
-                {
-                    //first we need to delete the job!
-                    //Job job = new Job();
-                    //int u = Int32.Parse(Session["userId"].ToString());
-                    //job = db.Jobs.Where(acc => acc.User.Id == u).FirstOrDefault();
-                    //db.Jobs.Remove(job);
-                    //db.SaveChanges();
-
-                    SessionPersister.UserRole = ur;
-                    return RedirectToAction("EnrollJob", "JCDashboard");
-                }
-                else if (ur == "User")
-                {
-                    var hasReservations = db.Appointments.Any(p => p.UserId == SessionPersister.UserId);//
-                    if (hasReservations)
-                    {
-                        return RedirectToAction("Reservations", "Main");
-                    }
-                    return RedirectToAction("Jobs", "Main");
-                }
-                else//JobOwner
-                {
-                    var hasAppointments = db.Appointments.Any(p => p.Service.JobCorp.UserId == SessionPersister.UserId);
-                    var hasServices = db.Services.Any(p => p.JobCorp.UserId == SessionPersister.UserId);
-                    var hasWorkingTimes = db.WorkingTimes.Any(p => p.JobCorp.UserId == SessionPersister.UserId);
-                    if (!hasServices)
-                    {
-                        return RedirectToAction("Create", "Services");
-                    }
-                    if (!hasWorkingTimes)
-                    {
-                        return RedirectToAction("AddWorkingTime", "JCDashboard");
-                    }
-                    if (hasAppointments)
-                    {
-                        return RedirectToAction("AppointmentList", "JCDashboard");
-                    }
-                    return RedirectToAction("Index", "JCDashboard");
-
-                }
-
-            }
-            else if (SessionPersister.UserRole.ToString() == "JobCorp")
-            {
-                if (ur == "JobOwner")
-                {
-
-                    JobCorp jc = new JobCorp();
-                    var u = Int32.Parse(Session["userId"].ToString());
-                    jc = db.JobCorps.Where(acc => acc.UserId.Equals(u)).FirstOrDefault();
-                    
-                    //IQueryable<Service> ser = db.Services.Where(acc => acc.JobCorpId == jc.Id);
-                    //List<Service> serlist = ser.ToList();
-                    //IQueryable<Appointment> app = db.Appointments.Where(acc => acc.Service.JobCorpId == jc.Id);
-                    //List<Appointment> applist = app.ToList();
-                    //IQueryable<WorkingTime> wt = db.WorkingTimes.Where(acc => acc.JobCorpId == jc.Id);
-                    //List<WorkingTime> wtlist = wt.ToList();
-                    if (jc == null)
-                    {
-                        ViewBag.Error = "سیستم موفق به حذف شما از لیست همکاران نشد";
-                        return View();
-                    }
-                    //db.Services.RemoveRange(ser);
-                    //db.SaveChanges();
-                    //db.Appointments.RemoveRange(applist);
-                    //db.SaveChanges();
-                    //db.WorkingTimes.RemoveRange(wtlist);
-                    //db.SaveChanges();
-
-                    //db.JobCorps.Remove(jc);
-                    //db.SaveChanges();
-
-                    SessionPersister.UserRole = ur;
-                    return RedirectToAction("Create", "Jobs", new { JobOwnerId = user.Id });
-                }
-                else if (ur == "User")
-                {
-                    var hasReservations = db.Appointments.Any(p => p.UserId == SessionPersister.UserId);//
-                    if (hasReservations)
-                    {
-                        return RedirectToAction("Reservations", "Main");
-                    }
-                    return RedirectToAction("Jobs", "Main");
-                }
-                else//JobOwner
-                {
-                    var hasAppointments = db.Appointments.Any(p => p.Service.JobCorp.UserId == SessionPersister.UserId);
-                    var hasServices = db.Services.Any(p => p.JobCorp.UserId == SessionPersister.UserId);
-                    var hasWorkingTimes = db.WorkingTimes.Any(p => p.JobCorp.UserId == SessionPersister.UserId);
-                    if (!hasServices)
-                    {
-                        return RedirectToAction("Create", "Services");
-                    }
-                    if (!hasWorkingTimes)
-                    {
-                        return RedirectToAction("AddWorkingTime", "JCDashboard");
-                    }
-                    if (hasAppointments)
-                    {
-                        return RedirectToAction("AppointmentList", "JCDashboard");
-                    }
-                    return RedirectToAction("Index", "JCDashboard");
-
-                }
-
+                return RedirectToAction("Index", "Manage");
             }
 
-            
-            return RedirectToAction("Jobs", "Main");
+            if (ModelState.IsValid)
+            {
+                // Get the information about the user from the external login provider
+                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                if (info == null)
+                {
+                    return View("ExternalLoginFailure");
+                }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user);
+                if (result.Succeeded)
+                {
+                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    if (result.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToLocal(returnUrl);
+                    }
+                }
+                AddErrors(result);
+            }
+
+            ViewBag.ReturnUrl = returnUrl;
+            return View(model);
         }
 
-        //[HttpGet]
-        //[CustomAuthorize(Roles = "Dev,SuperAdmin")]
-        //public ActionResult EditUser(int? id)
-        //{
-        //    if (id.HasValue)
-        //    {
-        //        User user = am.findById(id.Value);
-        //        if (user == null)
-        //        {
-        //            ViewBag.Error = "user Not Found";
-        //            return RedirectToAction("Index");
-        //        }
-        //        List<UserRole> UserRoles = new List<UserRole>();
-        //        UserRoles = db.UserRoles.ToList();
-        //        ViewBag.UserRoles = UserRoles;
+        //
+        // POST: /Account/LogOff
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Home");
+        }
 
-        //        ViewBag.EDG = am.GetEduList();
-        //        return View(user);
-        //    }
-        //    return RedirectToAction("Members");
-        //}
+        //
+        // GET: /Account/ExternalLoginFailure
+        [AllowAnonymous]
+        public ActionResult ExternalLoginFailure()
+        {
+            return View();
+        }
 
-        //// POST: /User/Edit/5
-        //[HttpPost]
-        //[CustomAuthorize(Roles = "Dev,SuperAdmin")]
-        //public ActionResult EditUser(User user)
-        //{
-        //    am.EditUser(user);
-        //    return RedirectToAction("Members");
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_userManager != null)
+                {
+                    _userManager.Dispose();
+                    _userManager = null;
+                }
 
-        //[HttpGet]
-        //[CustomAuthorize(Roles = "Dev,SuperAdmin,Admin,User")]
-        //public ActionResult Delete()
-        //{
-        //    User user = am.findById(SessionPersister.UserId);
-        //    user = am.DeleteUser(user);
-        //    if (user == null)
-        //    {
-        //        ViewBag.Message = "user Not Deleted";
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = user.Username + "Deleted";
-        //    }
+                if (_signInManager != null)
+                {
+                    _signInManager.Dispose();
+                    _signInManager = null;
+                }
+            }
 
-        //    return RedirectToAction("SignIn");
-        //}
+            base.Dispose(disposing);
+        }
 
-        //[CustomAuthorize(Roles = "Dev,SuperAdmin")]
-        //public ActionResult Members()
-        //{
-        //    List<User> users = new List<User>();
-        //    users = am.findAll();
-        //    return View(users);
-        //}
+        #region Helpers
+        // Used for XSRF protection when adding external logins
+        private const string XsrfKey = "XsrfId";
 
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
 
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
 
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Home");
+        }
 
+        internal class ChallengeResult : HttpUnauthorizedResult
+        {
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
+            {
+            }
+
+            public ChallengeResult(string provider, string redirectUri, string userId)
+            {
+                LoginProvider = provider;
+                RedirectUri = redirectUri;
+                UserId = userId;
+            }
+
+            public string LoginProvider { get; set; }
+            public string RedirectUri { get; set; }
+            public string UserId { get; set; }
+
+            public override void ExecuteResult(ControllerContext context)
+            {
+                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
+                if (UserId != null)
+                {
+                    properties.Dictionary[XsrfKey] = UserId;
+                }
+                context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
+            }
+        }
+        #endregion
     }
 }

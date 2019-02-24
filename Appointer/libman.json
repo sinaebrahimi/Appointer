@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "modernizr@2.8.3",
+      "destination": "lib/modernizr/"
+    },
+    {
+      "library": "twitter-bootstrap@3.4.1",
+      "destination": "lib/twitter-bootstrap/"
+    },
+    {
+      "library": "font-awesome@4.7.0",
+      "destination": "lib/font-awesome/"
+    }
+  ]
+}

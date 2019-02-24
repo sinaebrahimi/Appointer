@@ -1,14 +1,14 @@
 ﻿@model Appointer.Models.Job
 
 @{
-    ViewBag.Title = "حذف شغل";
+    ViewBag.Title = "Delete";
 }
 
-<h2>حذف شغل</h2>
+<h2>Delete</h2>
 
-
-<h5>آیا از حذف کردن شغل خود از سایت اطمینان دارید؟</h5>
+<h3>Are you sure you want to delete this?</h3>
 <div>
+    <h4>Job</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -20,43 +20,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.JobPhone)
+            @Html.DisplayNameFor(model => model.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.JobPhone)
+            @Html.DisplayFor(model => model.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.PhoneNumber)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.About)
+            @Html.DisplayNameFor(model => model.Mobile)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.About)
+            @Html.DisplayFor(model => model.Mobile)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.User.Email)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.User.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.JobType.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.JobType.Title)
+            @Html.DisplayFor(model => model.Email)
         </dd>
 
     </dl>
@@ -65,7 +57,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" />
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

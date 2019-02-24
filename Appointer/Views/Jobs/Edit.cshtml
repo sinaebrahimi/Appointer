@@ -1,95 +1,74 @@
 ﻿@model Appointer.Models.Job
 
 @{
-    ViewBag.Title = "ویرایش شغل";
-    Layout = "~/Views/shared/_layout.cshtml";
+    ViewBag.Title = "Edit";
 }
 
-    <div class="info text-center">
-        <div class="info-title"><strong>ویرایش شغل</strong></div>
-        <hr>
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Job</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
     </div>
+}
 
-    @ViewBag.Error
-    @ViewBag.Message
-    @using (Html.BeginForm("Edit", "Jobs", FormMethod.Post, new { @class = "form-horizontal text-center" }))
-    {
-        @Html.AntiForgeryToken()
-
-        
-
-                @Html.HiddenFor(model => model.Id)
-
-                @Html.LabelFor(model => model.Title)
-                <br />
-                @Html.EditorFor(model => model.Title)
-        <br />
-                @Html.ValidationMessageFor(model => model.Title)
-
-                <br />
-                @Html.LabelFor(model => model.JobPhone)
-                <br />
-                @Html.EditorFor(m => m.JobPhone, new { maxlength = "11", onkeyup = "this.value = this.value.replace(/[^0-9]/, '')" })
-        <br />
-                @Html.ValidationMessageFor(model => model.JobPhone)
-                <br />
-
-
-                @Html.LabelFor(model => model.Address)
-                <br />
-                @Html.EditorFor(m => m.Address)
-                <br />
-                <br />
-
-                @Html.LabelFor(model => model.CityId)
-                <br />
-                <select name="CityId" id="CityId">
-                    @foreach (Appointer.Models.City cities in ViewBag.cities)
-                    {
-                        <option value="@cities.Id">@cities.Name</option>
-                    }
-                </select>
-                <br />
-                <br />
-
-
-                @Html.LabelFor(model => model.JobTypeId)
-                <br />
-                <select name="JobTypeId" id="JobTypeId">
-                    @foreach (Appointer.Models.JobType jt in ViewBag.jt)
-                    {
-                        <option value="@jt.Id">@jt.Title</option>
-                    }
-                </select>
-                <br /><br />
-
-                @Html.LabelFor(model => model.EnrollmentKey)
-                <br />
-                @Html.EditorFor(model => model.EnrollmentKey)
-                @Html.ValidationMessageFor(model => model.EnrollmentKey)
-                <br />
-                <span>برای افزودن همکاران باید کلیدی بیفزایید تا همکار با وارد کردن آن به شما ملحق شود</span>
-                <br/>
-                @*@Html.DisplayText("برای افزودن همکاران باید کلیدی بیفزایید تا همکار با وارد کردن آن به شما ملحق شود")*@
-                @*Html.LabelFor(model => model.JobTypeId)
-                    <br />
-                    @Html.DropDownListFor(model => model.JobTypeId, new SelectList(ViewBag.jt, "Id", "Title"))
-                    <br />*@
-                <br />
-                @Html.LabelFor(model => model.About)
-                <br />
-                @Html.TextAreaFor(m => m.About)
-                <br />
-                <br />
-
-                <button class="btn btn-default-custom" type="submit" value="Edit">ویرایش شغل</button>
-                
-    }
-
-
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-

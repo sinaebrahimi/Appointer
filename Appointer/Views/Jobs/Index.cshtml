@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Appointer.Models.Job>
 
 @{
-    ViewBag.Title = "لیست شغل‌ها";
+    ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
@@ -15,19 +15,16 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.JobPhone)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.PhoneNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.About)
+            @Html.DisplayNameFor(model => model.Mobile)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobType.Title)
+            @Html.DisplayNameFor(model => model.Email)
         </th>
         <th></th>
     </tr>
@@ -38,19 +35,16 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.JobPhone)
+            @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Address)
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.About)
+            @Html.DisplayFor(modelItem => item.Mobile)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.User.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JobType.Title)
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

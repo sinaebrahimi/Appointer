@@ -38,7 +38,7 @@
     <link rel="canonical" href="http://Appointer.com/" />
 
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/styles/css")
     @RenderSection("styles", required: false)
 </head>
 <body>
@@ -194,7 +194,7 @@
                             <a href="~/Main/Reservations">
                                 <span class="fa fa-calendar" aria-hidden="true"></span><br>رزروهای‌امروز و فردا
                             </a>
-                        </li> 
+                        </li>
 
                         <li>
                             <a href="~/Home/About">
@@ -211,10 +211,9 @@
             </div>
         </div>
     </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/modernizr")
     @RenderSection("scripts", required: false)
-
 </body>
 </html>
