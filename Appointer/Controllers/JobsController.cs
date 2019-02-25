@@ -43,7 +43,7 @@ namespace Appointer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description,PhoneNumber,Mobile,Email")] Job job)
+        public ActionResult Create([Bind(Include = "Id,Title,Description,PhoneNumber,Mobile,Email,WorkingDay,WorkingHour")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace Appointer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Description,PhoneNumber,Mobile,Email")] Job job)
+        public ActionResult Edit([Bind(Include = "Id,Title,Description,PhoneNumber,Mobile,Email,WorkingDay,WorkingHour")] Job job)
         {
             if (ModelState.IsValid)
             {

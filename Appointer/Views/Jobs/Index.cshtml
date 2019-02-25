@@ -26,6 +26,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkingDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkingHour)
+        </th>
         <th></th>
     </tr>
 
@@ -45,6 +51,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkingDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkingHour)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
