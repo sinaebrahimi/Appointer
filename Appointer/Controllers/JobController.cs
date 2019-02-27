@@ -1,30 +1,30 @@
 ﻿using Appointer.DAL;
 using Appointer.Models;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Appointer.Controllers
 {
-    public class JobsController : Controller
+    public class JobController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Jobs
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(db.Jobs.ToList());
+            var list = await db.Jobs.ToListAsync();
+            return View(list);
         }
 
-        // GET: Jobs/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Job job = db.Jobs.Find(id);
+
+            var job = await db.Jobs.FindAsync(id);
             if (job == null)
             {
                 return HttpNotFound();
@@ -32,30 +32,28 @@ namespace Appointer.Controllers
             return View(job);
         }
 
-        // GET: Jobs/Create
+        [Authorize(Roles = "Developer,Admin,JobOwner")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Jobs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description,PhoneNumber,Mobile,Email,WorkingDay,WorkingHour")] Job job)
+        [Authorize(Roles = "Developer,Admin,JobOwner")]
+        public async Task<ActionResult> Create(Job job)
         {
             if (ModelState.IsValid)
             {
                 db.Jobs.Add(job);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
             return View(job);
         }
 
-        // GET: Jobs/Edit/5
+        [Authorize(Roles = "Developer,Admin,JobOwner")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -70,30 +68,29 @@ namespace Appointer.Controllers
             return View(job);
         }
 
-        // POST: Jobs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Description,PhoneNumber,Mobile,Email,WorkingDay,WorkingHour")] Job job)
+        [Authorize(Roles = "Developer,Admin,JobOwner")]
+        public async Task<ActionResult> Edit(Job job)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(job).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(job);
         }
 
-        // GET: Jobs/Delete/5
-        public ActionResult Delete(int? id)
+        [Authorize(Roles = "Developer,Admin,JobOwner")]
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Job job = db.Jobs.Find(id);
+
+            var job = await db.Jobs.FindAsync(id);
             if (job == null)
             {
                 return HttpNotFound();
@@ -101,14 +98,13 @@ namespace Appointer.Controllers
             return View(job);
         }
 
-        // POST: Jobs/Delete/5
-        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [Authorize(Roles = "Developer,Admin")]
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Job job = db.Jobs.Find(id);
+            var job = await db.Jobs.FindAsync(id);
             db.Jobs.Remove(job);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

@@ -29,5 +29,7 @@ namespace Appointer.DAL
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Appointer.Models.Reserve> Reserves { get; set; }
     }
 }

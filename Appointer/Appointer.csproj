@@ -162,8 +162,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\JobsController.cs" />
+    <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReserveController.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
     <Compile Include="DAL\Migrations\MigrationConfiguration.cs" />
     <Compile Include="DAL\Migrations\MigrationsContextFactory.cs" />
@@ -173,8 +174,10 @@
     <Compile Include="Models\Identity\AccountViewModels.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
+    <Compile Include="Models\Reserve.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\Identity\ManageViewModels.cs" />
+    <Compile Include="Models\JobType.cs" />
     <Compile Include="Models\WorkingDay.cs" />
     <Compile Include="Models\WorkingHour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -321,8 +324,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -346,6 +347,11 @@
     <Content Include="Views\Jobs\Details.cshtml" />
     <Content Include="Views\Jobs\Edit.cshtml" />
     <Content Include="Views\Jobs\Index.cshtml" />
+    <Content Include="Views\Reserve\Create.cshtml" />
+    <Content Include="Views\Reserve\Delete.cshtml" />
+    <Content Include="Views\Reserve\Details.cshtml" />
+    <Content Include="Views\Reserve\Edit.cshtml" />
+    <Content Include="Views\Reserve\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
